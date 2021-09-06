@@ -58,7 +58,7 @@ class View {
         const whitePieces = ['&#9814', '&#9816', '&#9815', '&#9813', '&#9812', '&#9815', '&#9816', '&#9814']
         const whitePawn = '&#9817'
 
-        const blackPieces = ['&#9820', '&#9822', '&#9821', '&#9818', '&#9819', '&#9821', '&#9822', '&#9820']
+        const blackPieces = ['&#9820', '&#9822', '&#9821', '&#9819', '&#9818', '&#9821', '&#9822', '&#9820']
         const blackPawn = '&#9823'
 
         let squares = document.getElementsByTagName('li');
@@ -77,11 +77,11 @@ class View {
                 piece.innerHTML = whitePawn
                 squares[i].appendChild(piece)
             } else if (i > 55) {
-                // for(let j = 0; j < 8; j++) {
+            
                     let piece = document.createElement('div');
                     piece.innerHTML = whitePieces[i % 56]
                     squares[i].appendChild(piece)
-                // }
+               
             }
         }
 

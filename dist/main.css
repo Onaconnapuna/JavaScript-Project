@@ -39,7 +39,7 @@
   }
 
   li[data-color = 'black'] {
-    background-color: black;
+    background-color: rgb(175, 163, 163);
   }
 
   li div {

@@ -1,39 +1,52 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
-h1 {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  top: 30px;
-  font-size: 40px;
-  font-weight: 600;
-  font-family: sans-serif;
-}
 
-#board {
- position: absolute;
-}
+  h1 {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 30px;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: sans-serif;
+  }
+  
+  #board {
+   position: absolute;
+  }
+  
+  .BoardPositions {
+    border: 4px solid rgb(175, 163, 163);
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    top: 150px;
+    left: 800px;
+    height: 600px;
+    width: 600px;
+  }
+  
+  li {
+   border: 1px solid black;
+   height: 73px;
+   width: 73px;
+   font-size: 73px;
+   /* position: absolute; */
+   /* display: flex; */
+   /* text-align: middle; */
+   /* vertical-align: auto; */
+  }
 
-.BoardPositions {
-  border: 2px solid brown;
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
-  top: 150px;
-  left: 800px;
-  height: 600px;
-  width: 600px;
-}
+  li[data-color = 'black'] {
+    background-color: black;
+  }
 
-li {
- border: 1px solid black;
- height: 73px;
- width: 73px;
-}
+  li div {
+    position: relative;
+    vertical-align: center;
+    top: 5px;
+    
 
-
-
-
-
+  }
 

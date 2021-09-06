@@ -5,6 +5,8 @@ class View {
         this.board = new Board;
         this.viewEl = viewEl;
         this.setupBoard();
+        this.colorSquares();
+        this.placePieces();
     }
 
     setupBoard() {
@@ -23,8 +25,41 @@ class View {
                 boardPositions.appendChild(positon);
     
             }
-            // console.log(i)
         }
+
+    }
+
+    colorSquares() {
+        let squares = Array.from(document.getElementsByTagName('li'));
+
+        let white = true;
+
+        for(let i = 0; i < squares.length; i++) {
+            if (white) {
+                squares[i].setAttribute('data-color', 'white');
+                white = false;
+            } else {
+                squares[i].setAttribute('data-color', 'black');
+                white = true; 
+            }
+            
+            if ( (i + 1) % 8 === 0) {
+                if (white) {
+                    white = false 
+                } else {
+                    white = true
+                }
+            }
+        }
+    }
+
+    placePieces() {
+        let squares = Array.from(document.getElementsByTagName('li'));
+        let first = squares[0];
+        let piece = document.createElement('div');
+        piece.innerHTML = '&#9812'
+        
+        first.appendChild(piece)
     }
 }
 

@@ -26,4 +26,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const board = new Board
   const boardView = document.getElementById("board")
   const view = new View(board, boardView)
+  
 })

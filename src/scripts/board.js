@@ -16,6 +16,10 @@ class Board {
         return grid;
     }
 
-} 
+    // assignValues() {
+
+    // }
+
+}  
 
 export default Board

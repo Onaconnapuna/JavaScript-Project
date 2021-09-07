@@ -40,7 +40,6 @@ class BestMoves {
             let piece = document.createElement('div');
             piece.innerHTML = `${boardPos.firstChild.innerHTML}`;
             moveIcons[i].appendChild(piece);
-            console.log(i)
         }
     }
 

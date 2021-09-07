@@ -4,6 +4,7 @@ class View {
     constructor(board, viewEl) {
         this.board = new Board;
         this.viewEl = viewEl;
+        this.moves = []
         this.setupBoard();
         this.colorSquares();
         this.placePieces();
@@ -19,7 +20,7 @@ class View {
 
         for(let i = 8; i > 0; i--) {
             for(let j = 0; j < 8; j++) {
-                // let bool = true
+                
                 let positon = document.createElement('li');
                 positon.setAttribute('id', `${alphabetEight[j]}${i}`);
                 boardPositions.appendChild(positon);
@@ -31,9 +32,7 @@ class View {
 
     colorSquares() {
         let squares = Array.from(document.getElementsByTagName('li'));
-
         let white = true;
-
         for(let i = 0; i < squares.length; i++) {
             if (white) {
                 squares[i].setAttribute('data-color', 'white');
@@ -42,7 +41,6 @@ class View {
                 squares[i].setAttribute('data-color', 'black');
                 white = true; 
             }
-            
             if ( (i + 1) % 8 === 0) {
                 if (white) {
                     white = false 
@@ -84,7 +82,52 @@ class View {
                
             }
         }
+    } 
 
+    generateFenString() {
+
+        let board = document.getElementsByClassName('BoardPositions')[0]
+        let squares = board.childNodes;
+
+        let pieces = {
+            '9814': 'R',
+            '9816': 'N',
+            '9815': 'B',
+            '9813': 'Q',
+            '9812': 'K', 
+            '9817': 'P',
+            '9820': 'r',
+            '9822': 'n',
+            '9821': 'b',
+            '9819': 'q',
+            '9818': 'k',
+            '9823': 'p'
+        }
+
+        let fenString = "fen="
+        let counter = 0
+
+        for(let i = 0; i < squares.length; i++) {
+
+            if (squares[i].hasChildNodes()) {
+                if (counter > 0) {
+                    fenString += counter
+                    counter = 0
+                }
+                let childNode = squares[i].childNodes[0];
+                let code = childNode.innerHTML.charCodeAt(0);
+                fenString += pieces[code.toString()]
+            } else {
+                counter += 1
+            }
+            if ( (i + 1) % 8 === 0) {
+                if (counter > 0) {
+                    fenString += counter
+                    counter = 0
+                }
+                fenString += '/'
+            }
+        }
     }
 }
 

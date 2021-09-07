@@ -3,10 +3,6 @@ import { async } from "regenerator-runtime";
 class BestMoves {
     constructor(viewEl, fenString) {
         this.viewEl = viewEl;
-        // this.bestMoves = this.fetchBestMoves(fenString);
-        // setTimeout(() => {
-        //     this.displayBestMoves()
-        // }, 1)
         this.displayBestMoves(fenString);
     }
 
@@ -30,11 +26,33 @@ class BestMoves {
         
     }
 
+    hoverOverMove() {
+        let table = document.getElementsByClassName('MovesReference');
+        let moveIcons = table[0].childNodes;
+        console.log(moveIcons);
+        for(let i = 0; i < moveIcons.length; i++) {
+            let firstPosID = moveIcons[i].id.split('').slice(0, 2).join('');
+            let lastPosID = moveIcons[i].id.split('').slice(2).join('');
+            moveIcons[i].addEventListener("mouseover", function(){
+                let startingPosElement = document.getElementById(firstPosID);
+                let endingPosElement = document.getElementById(lastPosID);
+                startingPosElement.style.backgroundColor = "lightgreen";
+                endingPosElement.style.backgroundColor = "red";
+            })
+            moveIcons[i].addEventListener('mouseout', function() {
+
+                let startingPosElement = document.getElementById(firstPosID);
+                let endingPosElement = document.getElementById(lastPosID);
+                startingPosElement.style.backgroundColor = null;
+                endingPosElement.style.backgroundColor = null;
+
+            })
+        }
+    }
+
     displayBestMoves = async(fenString) => { 
 
         await this.fetchBestMoves(fenString);
-
-        debugger
 
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
@@ -46,8 +64,13 @@ class BestMoves {
             piece.innerHTML = `${boardPos.firstChild.innerHTML}`;
             moveIcons[i].appendChild(piece);
         }
-        console.log('I fired')
+
+        this.hoverOverMove();
+
     }
+
+
+
 
 }
 

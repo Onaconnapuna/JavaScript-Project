@@ -15,20 +15,28 @@
   #board {
    position: absolute;
   }
+
+  #moves {
+    position: absolute;
+    /* width: 400px; */
+    z-index: 8;
+  }
   
   .MovesReference {
     position: relative;
-    top: 225px;
-    left: 1350px;
+    top: 179px;
+    left: 500px;
     display: flex;
     flex-wrap: wrap;
     border: 2px solid black;
     height: 450px;
     width: 150px;
+    z-index: 9;
   }
 
   .MovesReference li {
     background-color:rgb(175, 163, 163) ;
+    z-index: 10;
   }
 
   .BoardPositions {
@@ -36,10 +44,11 @@
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    top: 150px;
+    top: 100px;
     left: 700px;
     height: 600px;
     width: 600px;
+    z-index: 9;
   }
   
   li {
@@ -47,7 +56,7 @@
    height: 73px;
    width: 73px;
    font-size: 73px;
-
+   z-index: 10;
   }
 
   li[data-color = 'black'] {
@@ -58,7 +67,5 @@
     position: relative;
     vertical-align: center;
     top: 5px;
-    
-
   }
   

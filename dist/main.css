@@ -16,7 +16,7 @@
    position: absolute;
   }
   
-  .movesReference {
+  .MovesReference {
     position: relative;
     top: 225px;
     left: 1350px;
@@ -27,7 +27,7 @@
     width: 150px;
   }
 
-  .movesReference li {
+  .MovesReference li {
     background-color:rgb(175, 163, 163) ;
   }
 

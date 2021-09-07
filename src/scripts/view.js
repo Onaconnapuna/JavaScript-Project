@@ -19,9 +19,9 @@ class View {
 
         for(let i = 8; i > 0; i--) {
             for(let j = 0; j < 8; j++) {
-                let bool = true
+                // let bool = true
                 let positon = document.createElement('li');
-                positon.setAttribute('id', `[${alphabetEight[j]}, ${i}]`);
+                positon.setAttribute('id', `${alphabetEight[j]}${i}`);
                 boardPositions.appendChild(positon);
     
             }

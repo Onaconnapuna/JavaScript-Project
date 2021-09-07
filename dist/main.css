@@ -22,9 +22,24 @@
     flex-wrap: wrap;
     position: relative;
     top: 150px;
-    left: 800px;
+    left: 700px;
     height: 600px;
     width: 600px;
+  }
+
+  .movesReference {
+    position: relative;
+    height: 450px;
+    width: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    top: 225px;
+    left: 1400px;
+    border: 1px solid black;
+  }
+
+  .movesReference li {
+    background-color: rgb(175, 163, 163) ;
   }
   
   li {
@@ -32,10 +47,6 @@
    height: 73px;
    width: 73px;
    font-size: 73px;
-   /* position: absolute; */
-   /* display: flex; */
-   /* text-align: middle; */
-   /* vertical-align: auto; */
   }
 
   li[data-color = 'black'] {
@@ -46,7 +57,5 @@
     position: relative;
     vertical-align: center;
     top: 5px;
-    
-
   }
 

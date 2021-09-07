@@ -16,9 +16,6 @@ class Board {
         return grid;
     }
 
-    // assignValues() {
-
-    // }
 
 }  
 

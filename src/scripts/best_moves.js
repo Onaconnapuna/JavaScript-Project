@@ -1,10 +1,11 @@
-import { async } from "regenerator-runtime";
-import View from "./view.js"
-
 class BestMoves {
     constructor(viewEl, fenString) {
         this.viewEl = viewEl;
         this.bestMoves = this.fetchBestMoves(fenString)
+        // setTimeout(() => {
+        //     this.displayMovePiece
+        // }, 1)
+        this.displayMovePiece()
     }
 
     fetchBestMoves = async(fenString) => {
@@ -26,42 +27,22 @@ class BestMoves {
         
     }
 
-    // letsSee(fenString) {
-    //     const moves = this.fetchBestMoves(fenString)
-    //     console.log(moves)
-    // }
-    // fetchBestMoves = async(fenString) => {
+    displayMovePiece() { 
 
-    //     let bestMoves;
+        // setTimeout(this.fetchBestMoves(fenString))
 
-    //     await fetch('https://explorer.lichess.ovh/master?' + `${fenString}`)
-    //         .then((response) => {
-    //             return response.json()
-    //                 .then((data) => {
-    //                     console.log(data.moves)
-    //                     bestMoves = data.moves
-    //                 })
-    //             })
-    //             .catch("There was an error")
-    //         return bestMoves
-        
-    // }
+        let table = document.getElementsByClassName('movesReference');
+        let moveIcons = table[0].childNodes;
 
-    // createBestMoves = async(fenString) => {
-
-    //     this.fetchBestMoves(fenString)
-
-    //     const movesReference = document.createElement('ul');
-    //     this.viewEl.appendChild(movesReference);
-    //     movesReference.setAttribute("class", "movesReference");
-    //     for(let i = 0; i < 12; i++) {
-    //         let move = document.createElement('li');
-    //         move.setAttribute('id', `${this.bestMoves[0][i].uci}`);
-    //         movesReference.appendChild(move);
-    //     }
-    // }
-
-
+        for(let i = 0; i < moveIcons.length; i++) {
+            firstPosID = moveIcons[i].id.split('').slice(0, 2).join('')
+            boardPos = document.getElementById(firstPosID);
+            let piece = document.createElement('div');
+            piece.innerHTML = `${boardPos.firstChild.innerHTML}`;
+            moveIcons[i].appendChild(piece);
+            console.log(i)
+        }
+    }
 
 }
 

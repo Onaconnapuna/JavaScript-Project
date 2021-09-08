@@ -29,7 +29,7 @@ class BestMoves {
     hoverOverMove() {
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
-        console.log(moveIcons);
+        
         for(let i = 0; i < moveIcons.length; i++) {
             let firstPosID = moveIcons[i].id.split('').slice(0, 2).join('');
             let lastPosID = moveIcons[i].id.split('').slice(2).join('');
@@ -50,6 +50,26 @@ class BestMoves {
         }
     }
 
+    movePiece() {
+        let table = document.getElementsByClassName('MovesReference');
+        let moveIcons = table[0].childNodes;
+
+        for(let i = 0; i < moveIcons.length; i++){
+            let firstPosID = moveIcons[i].id.split('').slice(0, 2).join('');
+            let lastPosID = moveIcons[i].id.split('').slice(2).join('');
+            moveIcons[i].addEventListener("click", function() {
+                let startingPosElement = document.getElementById(firstPosID);
+                let endingPosElement = document.getElementById(lastPosID);
+                let piece = startingPosElement.childNodes[0]
+                let code = piece.innerHTML.charCodeAt(0);
+                let movedPiece = document.createElement('div')
+                movedPiece.innerHTML = `&#${code}`
+                endingPosElement.appendChild(movedPiece)
+                startingPosElement.removeChild(startingPosElement.childNodes[0])
+            })
+        }
+    }
+
     displayBestMoves = async(fenString) => { 
 
         await this.fetchBestMoves(fenString);
@@ -59,18 +79,20 @@ class BestMoves {
 
         for(let i = 0; i < moveIcons.length; i++) {
             let firstPosID = moveIcons[i].id.split('').slice(0, 2).join('')
+            let lastPosID = moveIcons[i].id.split('').slice(2).join('')
             let boardPos = document.getElementById(firstPosID);
             let piece = document.createElement('div');
+            let posReference= document.createElement('p');
+            posReference.innerHTML = lastPosID.toUpperCase()
             piece.innerHTML = `${boardPos.firstChild.innerHTML}`;
             moveIcons[i].appendChild(piece);
+            moveIcons[i].appendChild(posReference)
         }
-
+        
         this.hoverOverMove();
-
+        this.movePiece();
     }
-
-
-
+    
 
 }
 

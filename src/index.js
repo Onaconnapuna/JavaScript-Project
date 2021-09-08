@@ -13,4 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const view = new View(board, boardView)
   const movesTable = document.getElementById("moves")
   const best_moves =  new BestMoves(movesTable,'fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201')
+
+  let movesWithoutCapture = 0
+
 })

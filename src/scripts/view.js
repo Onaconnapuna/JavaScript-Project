@@ -4,7 +4,7 @@ class View {
     constructor(board, viewEl) {
         this.board = new Board;
         this.viewEl = viewEl;
-        this.moves = []
+        this.moves = ['fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201']
         this.setupBoard();
         this.colorSquares();
         this.placePieces();
@@ -84,7 +84,7 @@ class View {
         }
     } 
 
-    generateFenString() {
+    generateFenString(movesWithoutCapture) {
 
         let board = document.getElementsByClassName('BoardPositions')[0]
         let squares = board.childNodes;
@@ -128,6 +128,18 @@ class View {
                 fenString += '/'
             }
         }
+        
+        if (this.moves[this.moves.length - 1].includes('w')) {
+            fenString += " b"
+        } else {
+            fenString += " w"
+        }
+
+        fenString += ' KQkq '
+        fenString += movesWithoutCapture + ' '
+        fenString += this.moves.length + 1 
+
+        this.moves.push(fenString)
     }
 }
 

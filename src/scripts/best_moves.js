@@ -53,10 +53,18 @@ class BestMoves {
         }
     }
 
-    // renderNewMoves() {
-    //     movesTable = document.getElementById('moves')
-    //     let newMoves = new BestMoves(movesTable, generateFenString())
-    //   }
+    resetMoves() {
+        let table = document.getElementsByClassName('MovesReference');
+        let moveIcons = table[0].childNodes;
+    
+        
+        for(let i = 0; i < moveIcons.length; i++){ 
+          moveIcons[i].document.addEventListener('click', () => {
+            fenString = generateFenString()
+            moves = new BestMoves(movesTable, fenString)
+          })
+        }
+      }
 
     movePiece() {
         let table = document.getElementsByClassName('MovesReference');
@@ -66,6 +74,9 @@ class BestMoves {
             let firstPosID = moveIcons[i].id.split('').slice(0, 2).join('');
             let lastPosID = moveIcons[i].id.split('').slice(2).join('');
             moveIcons[i].addEventListener("click", function() {
+
+                //retrieving elements
+
                 let startingPosElement = document.getElementById(firstPosID);
                 let endingPosElement = document.getElementById(lastPosID);
                 startingPosElement.style.backgroundColor = null;
@@ -74,17 +85,21 @@ class BestMoves {
                 let code = piece.innerHTML.charCodeAt(0);
                 let movedPiece = document.createElement('div')
                 movedPiece.innerHTML = `&#${code}`
+
+                // moving the piece
                 if (endingPosElement.hasChildNodes()) {
                     endingPosElement.removeChild(endingPosElement.childNodes[0])
                 }
                 endingPosElement.appendChild(movedPiece)
                 startingPosElement.removeChild(startingPosElement.childNodes[0])
 
-                /// removing options from table
+                // removing options from table
                 table[0].removeChild(moveIcons[i])
                 while (table[0].firstChild) {
                     table[0].removeChild(table[0].firstChild)
                 }
+                let movesTable = document.getElementById('moves')
+                movesTable.removeChild(table[0])
             })
         }
     }
@@ -95,6 +110,8 @@ class BestMoves {
 
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
+
+        // displays squares on Moves Panel with square
 
         for(let i = 0; i < moveIcons.length; i++) {
             let firstPosID = moveIcons[i].id.split('').slice(0, 2).join('')
@@ -110,6 +127,7 @@ class BestMoves {
         
         this.hoverOverMove();
         this.movePiece();
+        this.resetMoves
     }
     
 

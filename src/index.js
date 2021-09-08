@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let view = new View(boardView)
   const movesTable = document.getElementById("moves")
   let moves = new BestMoves(movesTable, currentFen)
+  resetMoves();
   
 
   // const movesReference = document.createElement('ul');
@@ -22,6 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
   //   let moveLI = document.createElement('li')
   //   movesReference.appendChild(moveLI)
   // } 
+  function resetMoves() {
+    let table = document.getElementsByClassName('MovesReference');
+    let moveIcons = table[0].childNodes;
+
+    
+    for(let i = 0; i < moveIcons.length; i++){ 
+      moveIcons[i].document.addEventListener('click', () => {
+        fenString = generateFenString()
+        moves = new BestMoves(movesTable, fenString)
+      })
+    }
+  }
+
 
   let movesCounter = ['fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201']
   let movesWithoutCapture = 0

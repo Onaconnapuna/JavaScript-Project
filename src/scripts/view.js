@@ -1,7 +1,7 @@
 import Board from "./board"
 
 class View {
-    constructor(board, viewEl) {
+    constructor(viewEl) {
         this.board = new Board;
         this.viewEl = viewEl;
         this.moves = ['fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201']
@@ -84,11 +84,11 @@ class View {
         }
     } 
 
-    generateFenString(movesWithoutCapture) {
+    generateFenString() {
 
         let board = document.getElementsByClassName('BoardPositions')[0]
         let squares = board.childNodes;
-
+    
         let pieces = {
             '9814': 'R',
             '9816': 'N',
@@ -103,12 +103,12 @@ class View {
             '9818': 'k',
             '9823': 'p'
         }
-
+    
         let fenString = "fen="
         let counter = 0
-
+    
         for(let i = 0; i < squares.length; i++) {
-
+    
             if (squares[i].hasChildNodes()) {
                 if (counter > 0) {
                     fenString += counter
@@ -134,13 +134,15 @@ class View {
         } else {
             fenString += " w"
         }
-
+    
         fenString += ' KQkq '
         fenString += movesWithoutCapture + ' '
         fenString += this.moves.length + 1 
-
+    
         this.moves.push(fenString)
-    }
+        return fenString
+      }
+
 }
 
 export default View

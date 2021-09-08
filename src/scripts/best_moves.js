@@ -1,4 +1,6 @@
 import { async } from "regenerator-runtime";
+import View from "./view"
+import Index from '../index.js'
 
 class BestMoves {
     constructor(viewEl, fenString) {
@@ -9,14 +11,16 @@ class BestMoves {
     fetchBestMoves = async(fenString) => {
 
         const movesReference = document.createElement('ul');
+        // let movesReference = document.getElementsByClassName('MovesReference')
         this.viewEl.appendChild(movesReference);
         movesReference.setAttribute("class", "MovesReference");
+        // movesReference = document.getElementsByClassName('MovesReference');
 
         
         await fetch('https://explorer.lichess.ovh/master?' + `${fenString}`)
             .then((response) => response.json())
             .then((data) => {
-                //ebugger
+                
                 for(let i = 0; i < data.moves.length; i++) {
                     let move = document.createElement('li');
                     move.setAttribute('id', `${data.moves[i].uci}`);
@@ -45,10 +49,14 @@ class BestMoves {
                 let endingPosElement = document.getElementById(lastPosID);
                 startingPosElement.style.backgroundColor = null;
                 endingPosElement.style.backgroundColor = null;
-
             })
         }
     }
+
+    // renderNewMoves() {
+    //     movesTable = document.getElementById('moves')
+    //     let newMoves = new BestMoves(movesTable, generateFenString())
+    //   }
 
     movePiece() {
         let table = document.getElementsByClassName('MovesReference');
@@ -60,12 +68,23 @@ class BestMoves {
             moveIcons[i].addEventListener("click", function() {
                 let startingPosElement = document.getElementById(firstPosID);
                 let endingPosElement = document.getElementById(lastPosID);
+                startingPosElement.style.backgroundColor = null;
+                endingPosElement.style.backgroundColor = null;
                 let piece = startingPosElement.childNodes[0]
                 let code = piece.innerHTML.charCodeAt(0);
                 let movedPiece = document.createElement('div')
                 movedPiece.innerHTML = `&#${code}`
+                if (endingPosElement.hasChildNodes()) {
+                    endingPosElement.removeChild(endingPosElement.childNodes[0])
+                }
                 endingPosElement.appendChild(movedPiece)
                 startingPosElement.removeChild(startingPosElement.childNodes[0])
+
+                /// removing options from table
+                table[0].removeChild(moveIcons[i])
+                while (table[0].firstChild) {
+                    table[0].removeChild(table[0].firstChild)
+                }
             })
         }
     }

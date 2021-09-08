@@ -5,30 +5,90 @@ import Index from '../index.js'
 class BestMoves {
     constructor(viewEl, fenString) {
         this.viewEl = viewEl;
+        this.fenString = fenString;
         this.displayBestMoves(fenString);
+        this.playedMoves = [fenString]
+        this.movesWithoutCapture = 0
     }
 
     fetchBestMoves = async(fenString) => {
 
         const movesReference = document.createElement('ul');
-        // let movesReference = document.getElementsByClassName('MovesReference')
         this.viewEl.appendChild(movesReference);
         movesReference.setAttribute("class", "MovesReference");
-        // movesReference = document.getElementsByClassName('MovesReference');
-
+        
         
         await fetch('https://explorer.lichess.ovh/master?' + `${fenString}`)
-            .then((response) => response.json())
-            .then((data) => {
-                
-                for(let i = 0; i < data.moves.length; i++) {
-                    let move = document.createElement('li');
-                    move.setAttribute('id', `${data.moves[i].uci}`);
-                    movesReference.appendChild(move);
-                }
-            })
+        .then((response) => response.json())
+        .then((data) => {
+            
+            for(let i = 0; i < data.moves.length; i++) {
+                let move = document.createElement('li');
+                move.setAttribute('id', `${data.moves[i].uci}`);
+                movesReference.appendChild(move);
+            }
+        })
         
     }
+    
+    generateFenString() {
+
+        let board = document.getElementsByClassName('BoardPositions')[0]
+        let squares = board.childNodes;
+    
+        let pieces = {
+            '9814': 'R',
+            '9816': 'N',
+            '9815': 'B',
+            '9813': 'Q',
+            '9812': 'K', 
+            '9817': 'P',
+            '9820': 'r',
+            '9822': 'n',
+            '9821': 'b',
+            '9819': 'q',
+            '9818': 'k',
+            '9823': 'p'
+        }
+    
+        let fenString = "fen="
+        let counter = 0
+    
+        for(let i = 0; i < squares.length; i++) {
+    
+            if (squares[i].hasChildNodes()) {
+                if (counter > 0) {
+                    fenString += counter
+                    counter = 0
+                }
+                let childNode = squares[i].childNodes[0];
+                let code = childNode.innerHTML.charCodeAt(0);
+                fenString += pieces[code.toString()]
+            } else {
+                counter += 1
+            }
+            if ( (i + 1) % 8 === 0) {
+                if (counter > 0) {
+                    fenString += counter
+                    counter = 0
+                }
+                fenString += '/'
+            }
+        }
+        
+        if (this.playedMoves[this.playedMoves.length - 1].includes('w')) {
+            fenString += " b"
+        } else {
+            fenString += " w"
+        }
+    
+        fenString += ' KQkq '
+        fenString += this.movesWithoutCapture + ' '
+        fenString += this.playedMoves.length + 1 
+    
+        this.playedMoves.push(fenString)
+        return fenString
+      }
 
     hoverOverMove() {
         let table = document.getElementsByClassName('MovesReference');
@@ -59,9 +119,10 @@ class BestMoves {
     
         
         for(let i = 0; i < moveIcons.length; i++){ 
-          moveIcons[i].document.addEventListener('click', () => {
-            fenString = generateFenString()
-            moves = new BestMoves(movesTable, fenString)
+          moveIcons[i].addEventListener("click", () => {
+            let newfenString = this.generateFenString()
+            this.fenString = newfenString
+            this.displayBestMoves(this.fenString);
           })
         }
       }
@@ -127,7 +188,7 @@ class BestMoves {
         
         this.hoverOverMove();
         this.movePiece();
-        this.resetMoves
+        this.resetMoves();
     }
     
 

@@ -23,8 +23,8 @@
   }
   
   .MovesReference {
-    position: fixed;
-    top: 225px;
+    position: relative;
+    top: 175px;
     left: 500px;
     display: flex;
     flex-wrap: wrap;
@@ -73,10 +73,10 @@
   li p {
     position: relative;
     z-index: 10;
-    font-size: 30px;
-    top: 0px;
-    text-align: center;
+    font-size: 25px;
+    bottom: 75px;
   }
+
 
 
   

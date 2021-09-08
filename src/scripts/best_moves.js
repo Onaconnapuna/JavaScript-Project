@@ -7,8 +7,8 @@ class BestMoves {
         this.viewEl = viewEl;
         this.fenString = fenString;
         this.displayBestMoves(fenString);
-        this.playedMoves = [fenString]
-        this.movesWithoutCapture = 0
+        this.playedMoves = [fenString];
+        this.movesWithoutCapture = 0;
     }
 
     fetchBestMoves = async(fenString) => {
@@ -150,6 +150,7 @@ class BestMoves {
                 // moving the piece
                 if (endingPosElement.hasChildNodes()) {
                     endingPosElement.removeChild(endingPosElement.childNodes[0])
+                    this.movesWithoutCapture = 0
                 }
                 endingPosElement.appendChild(movedPiece)
                 startingPosElement.removeChild(startingPosElement.childNodes[0])
@@ -189,6 +190,10 @@ class BestMoves {
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();
+    }
+
+    backOneMove () {
+        this.displayBestMoves(this.playedMoves[this.playedMoves.length - 1])
     }
     
 

@@ -2,6 +2,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
 
+  body {
+    background-color: rgb(243, 238, 223);
+  }
+
   h1 {
     display: flex;
     justify-content: center;
@@ -18,26 +22,27 @@
 
   #moves {
     position: absolute;
-    /* width: 400px; */
     z-index: 8;
   }
   
   .MovesReference {
     position: relative;
+    background-color: rgb(243, 238, 223);
     top: 175px;
     left: 500px;
     display: flex;
     flex-wrap: wrap;
-    border: 2px solid black;
-    height: 450px;
     width: 150px;
     z-index: 9;
+    /* vertical-align: middle; */
   }
 
   .MovesReference li {
-    background-color:rgb(175, 163, 163) ;
+    background-color:rgb(247, 238, 215) ;
     z-index: 9;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .BoardPositions {
@@ -63,6 +68,10 @@
   li[data-color = 'black'] {
     background-color: rgb(175, 163, 163);
   }
+
+  li[data-color = 'white'] {
+    background-color: white;
+  } 
 
   li div {
     position: relative;

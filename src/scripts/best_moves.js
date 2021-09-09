@@ -184,6 +184,7 @@ class BestMoves {
         }
     }
 
+
     displayBestMoves = async(fenString) => { 
 
         await this.fetchBestMoves(fenString);

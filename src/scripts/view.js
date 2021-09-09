@@ -1,5 +1,4 @@
 
-
 class View {
     constructor(viewEl) {
         this.viewEl = viewEl;

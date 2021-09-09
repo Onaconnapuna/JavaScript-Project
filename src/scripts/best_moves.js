@@ -19,8 +19,8 @@ class BestMoves {
         const movesReference = document.createElement('ul');
         this.viewEl.appendChild(movesReference);
         movesReference.setAttribute("class", "MovesReference");
-        
-        
+        // grandmasters : 'https://explorer.lichess.ovh/master?'
+        // lichess : 'https://explorer.lichess.ovh/lichess?variant=standard&'
         await fetch('https://explorer.lichess.ovh/master?' + `${fenString}`)
         .then((response) => response.json())
         .then((data) => {
@@ -108,6 +108,21 @@ class BestMoves {
                 let endingPosElement = document.getElementById(lastPosID);
                 startingPosElement.style.backgroundColor = "lightgreen";
                 endingPosElement.style.backgroundColor = "red";
+
+                let whiteMeter = document.getElementById('white');
+                let drawMeter = document.getElementById('draw')
+                let blackMeter = document.getElementById('black');
+
+                // debugger
+
+                let totalValues = parseInt(moveIcons[i].dataset.white) + parseInt(moveIcons[i].dataset.black) + parseInt(moveIcons[i].dataset.draws)
+                let white = parseInt(moveIcons[i].dataset.white) / totalValues
+                let draw = parseInt(moveIcons[i].dataset.draws) / totalValues
+                let black = parseInt(moveIcons[i].dataset.white) / totalValues
+
+                whiteMeter.value = Math.round(white * 100)
+                drawMeter.value = Math.round(draw * 100)
+                blackMeter.value = Math.round(black * 100)
             })
             moveIcons[i].addEventListener('mouseout', function() {
 
@@ -115,6 +130,14 @@ class BestMoves {
                 let endingPosElement = document.getElementById(lastPosID);
                 startingPosElement.style.backgroundColor = null;
                 endingPosElement.style.backgroundColor = null;
+
+                let whiteMeter = document.getElementById('white');
+                let drawMeter = document.getElementById('draw')
+                let blackMeter = document.getElementById('black');
+
+                whiteMeter.value = 0
+                drawMeter.value = 0
+                blackMeter.value = 0
             })
         }
     }
@@ -154,6 +177,22 @@ class BestMoves {
             let lastPosID = moveIcons[i].id.split('').slice(2).join('');
             moveIcons[i].addEventListener("click", function() {
 
+                //meters
+
+                let whiteMeter = document.getElementById('white');
+                let drawMeter = document.getElementById('draw')
+                let blackMeter = document.getElementById('black');
+
+                let totalValues = parseInt(moveIcons[i].dataset.white) + parseInt(moveIcons[i].dataset.black) + parseInt(moveIcons[i].dataset.draws)
+                let white = parseInt(moveIcons[i].dataset.white) / totalValues
+                let draw = parseInt(moveIcons[i].dataset.draws) / totalValues
+                let black = parseInt(moveIcons[i].dataset.white) / totalValues
+
+                whiteMeter.value = Math.round(white * 100)
+                drawMeter.value = Math.round(draw * 100)
+                blackMeter.value = Math.round(black * 100)
+
+
                 //retrieving elements
 
                 let startingPosElement = document.getElementById(firstPosID);
@@ -184,6 +223,34 @@ class BestMoves {
         }
     }
 
+    displayWinPercClick() {
+        let table = document.getElementsByClassName('MovesReference');
+        let moveIcons = table[0].childNodes;
+
+        for(let i = 0; i < moveIcons.length; i++) {
+            moveIcons[i].addEventListener("click", function() {
+                // let whiteMeter = document.getElementById('white');
+                // let drawMeter = document.getElementById('draw')
+                // let blackMeter = document.getElementById('black');
+
+                // debugger
+
+                // let totalValues = moveIcons[i].dataset.white.parseInt() + moveIcons[i].dataset.black.parseInt() + moveIcons[i].dataset.draws.parseInt()
+                // let white = moveIcons[i].dataset.parseInt(white) / totalValues
+                // let draw = moveIcons[i].dataset.draws.parseInt() / totalValues
+                // let black = moveIcons[i].dataset.white.parseInt() / totalValues
+
+                // whiteMeter.value = Math.round(white * 100)
+                // drawMeter.value = Math.round(draw * 100)
+                // blackMeter.value = Math.round(black * 100)
+
+                // whiteMeter.setAttribute('value', whiteMeterValue)
+                // drawMeter.setAttribute('value', drawMeterValue)
+                // blackMeter.setAttribute('value', blackMeterValue)
+            })
+        }
+    }
+
 
     displayBestMoves = async(fenString) => { 
 
@@ -209,12 +276,12 @@ class BestMoves {
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();
-        // this.hardReset();
+        // this.displayWinPercClick();
     }
 
-    backOneMove () {
-        this.displayBestMoves(this.playedMoves[this.playedMoves.length - 1])
-    }
+    // backOneMove () {
+    //     this.displayBestMoves(this.playedMoves[this.playedMoves.length - 1])
+    // }
     
     
 

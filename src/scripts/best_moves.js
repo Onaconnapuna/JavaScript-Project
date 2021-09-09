@@ -3,12 +3,15 @@ import View from "./view"
 import Index from '../index.js'
 
 class BestMoves {
-    constructor(viewEl, fenString) {
+    constructor(viewEl, boardView, fenString) {
         this.viewEl = viewEl;
+        this.boardView = boardView 
         this.fenString = fenString;
-        this.displayBestMoves(fenString);
         this.playedMoves = [fenString];
         this.movesWithoutCapture = 0;
+
+        this.displayBestMoves(this.fenString);
+
     }
 
     fetchBestMoves = async(fenString) => {
@@ -116,12 +119,24 @@ class BestMoves {
     resetMoves() {
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
-    
+        let startingFen = 'fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201'
+        
         
         for(let i = 0; i < moveIcons.length; i++){ 
           moveIcons[i].addEventListener("click", () => {
-            let newfenString = this.generateFenString()
-            this.fenString = newfenString
+            let newfenString = this.generateFenString();
+            this.fenString = newfenString;
+
+            if (this.playedMoves.length === 11) {
+                this.fenString = startingFen;
+                this.playedMoves = [startingFen];
+                let movesTable = document.getElementById('moves')
+                this.boardView.placePieces();
+                this.displayBestMoves(startingFen);
+                movesTable.removeChild(table[0])
+              }
+            
+
             this.displayBestMoves(this.fenString);
           })
         }
@@ -190,11 +205,13 @@ class BestMoves {
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();
+        // this.hardReset();
     }
 
     backOneMove () {
         this.displayBestMoves(this.playedMoves[this.playedMoves.length - 1])
     }
+    
     
 
 }

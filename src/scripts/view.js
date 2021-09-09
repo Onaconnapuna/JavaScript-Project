@@ -4,10 +4,8 @@ class View {
     constructor(viewEl) {
         this.board = new Board;
         this.viewEl = viewEl;
-        // this.moves = ['fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201']
         this.setupBoard();
         this.colorSquares();
-        this.placePieces();
     }
 
     setupBoard() {
@@ -62,6 +60,12 @@ class View {
         let squares = document.getElementsByTagName('li');
 
         for (let i = 0; i < squares.length; i++) {
+
+            if (squares[i].hasChildNodes()) {
+                let ele = squares[i].firstChild;
+                squares[i].removeChild(ele);
+            }
+
             if (i < 8) {
                 let piece = document.createElement('div');
                 piece.innerHTML = blackPieces[i];
@@ -75,12 +79,10 @@ class View {
                 piece.innerHTML = whitePawn
                 squares[i].appendChild(piece)
             } else if (i > 55) {
-            
-                    let piece = document.createElement('div');
-                    piece.innerHTML = whitePieces[i % 56]
-                    squares[i].appendChild(piece)
-               
-            }
+                let piece = document.createElement('div');
+                piece.innerHTML = whitePieces[i % 56]
+                squares[i].appendChild(piece); 
+            } 
         }
     } 
 

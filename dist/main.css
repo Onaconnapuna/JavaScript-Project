@@ -130,3 +130,56 @@
     width: 350px;
     height: 20px;
   }
+
+  #AlphaGrid {
+    display: flex;
+    position: relative;
+    left: 732px;
+    top: 720px;
+    width: 540px;
+    justify-content: space-between;
+  }
+
+  #AlphaGrid div {
+    font-size: 20px;
+  }
+
+  #OneThroughEight {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: space-around;
+    /* align-items: flex-start; */
+    top: 88px;
+    left: 670px;
+    height: 600px;
+  }
+
+  #OneThroughEight div {
+    font-size: 20px;
+    
+  }
+
+  #MeterID {
+    position: relative;
+    display: flex;
+    left: 1400px;
+    top: 600px;
+    width: 190px;
+    justify-content: space-between;
+  }
+
+  #winMeter {
+    position: absolute;
+  }
+
+  #winMeter h2 {
+    position: relative;
+    left: 1415px;
+    top: 200px;
+    width: 175px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+

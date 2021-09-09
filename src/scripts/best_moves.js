@@ -178,19 +178,49 @@ class BestMoves {
             moveIcons[i].addEventListener("click", function() {
 
                 //meters
+                let meters = document.getElementById('winMeter')
 
                 let whiteMeter = document.getElementById('white');
                 let drawMeter = document.getElementById('draw')
                 let blackMeter = document.getElementById('black');
 
-                let totalValues = parseInt(moveIcons[i].dataset.white) + parseInt(moveIcons[i].dataset.black) + parseInt(moveIcons[i].dataset.draws)
-                let white = parseInt(moveIcons[i].dataset.white) / totalValues
-                let draw = parseInt(moveIcons[i].dataset.draws) / totalValues
-                let black = parseInt(moveIcons[i].dataset.white) / totalValues
+                let totalValues = parseInt(moveIcons[i].dataset.white) + parseInt(moveIcons[i].dataset.black) + parseInt(moveIcons[i].dataset.draws);
+                let white = parseInt(moveIcons[i].dataset.white) / totalValues;
+                let draw = parseInt(moveIcons[i].dataset.draws) / totalValues;
+                let black = parseInt(moveIcons[i].dataset.white) / totalValues;
 
-                whiteMeter.value = Math.round(white * 100)
-                drawMeter.value = Math.round(draw * 100)
-                blackMeter.value = Math.round(black * 100)
+                whiteMeter.value = Math.round(white * 100);
+                drawMeter.value = Math.round(draw * 100);
+                blackMeter.value = Math.round(black * 100);
+
+                let metersContainer = document.getElementById('metersContainer')
+                let metersValues = metersContainer.childNodes;
+
+                if (metersValues.length !== 0) {
+                    
+                    for(let i = 0; i < 3; i++) {
+                       
+                        metersContainer.removeChild(metersValues[0])
+                    }
+                }
+
+
+                let valueWhite = document.createElement('div');
+                let whiteContent = document.createTextNode(`${whiteMeter.value}%`)
+                valueWhite.appendChild(whiteContent);
+                // meters.appendChild(valueWhite);
+                metersContainer.appendChild(valueWhite)
+                let valueDraws = document.createElement('div');
+                let drawsContent = document.createTextNode(`${drawMeter.value}%`)
+                valueDraws.appendChild(drawsContent);
+                // meters.appendChild(valueDraws);
+                metersContainer.appendChild(valueDraws)
+                let valueBlack = document.createElement('div');
+                let blackContent = document.createTextNode(`${blackMeter.value}%`)
+                valueBlack.appendChild(blackContent);
+                // meters.appendChild(valueBlack)
+                metersContainer.appendChild(valueBlack)
+
 
 
                 //retrieving elements
@@ -223,33 +253,6 @@ class BestMoves {
         }
     }
 
-    displayWinPercClick() {
-        let table = document.getElementsByClassName('MovesReference');
-        let moveIcons = table[0].childNodes;
-
-        for(let i = 0; i < moveIcons.length; i++) {
-            moveIcons[i].addEventListener("click", function() {
-                // let whiteMeter = document.getElementById('white');
-                // let drawMeter = document.getElementById('draw')
-                // let blackMeter = document.getElementById('black');
-
-                // debugger
-
-                // let totalValues = moveIcons[i].dataset.white.parseInt() + moveIcons[i].dataset.black.parseInt() + moveIcons[i].dataset.draws.parseInt()
-                // let white = moveIcons[i].dataset.parseInt(white) / totalValues
-                // let draw = moveIcons[i].dataset.draws.parseInt() / totalValues
-                // let black = moveIcons[i].dataset.white.parseInt() / totalValues
-
-                // whiteMeter.value = Math.round(white * 100)
-                // drawMeter.value = Math.round(draw * 100)
-                // blackMeter.value = Math.round(black * 100)
-
-                // whiteMeter.setAttribute('value', whiteMeterValue)
-                // drawMeter.setAttribute('value', drawMeterValue)
-                // blackMeter.setAttribute('value', blackMeterValue)
-            })
-        }
-    }
 
 
     displayBestMoves = async(fenString) => { 
@@ -276,14 +279,8 @@ class BestMoves {
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();
-        // this.displayWinPercClick();
-    }
-
-    // backOneMove () {
-    //     this.displayBestMoves(this.playedMoves[this.playedMoves.length - 1])
-    // }
-    
-    
+        
+    } 
 
 }
 

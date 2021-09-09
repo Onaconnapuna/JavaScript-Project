@@ -45,6 +45,10 @@
     flex-wrap: wrap;
   }
 
+  .MovesReference li :hover {
+    cursor: pointer;
+  }
+
   .BoardPositions {
     border: 4px solid rgb(175, 163, 163);
     display: flex;

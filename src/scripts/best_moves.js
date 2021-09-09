@@ -28,6 +28,9 @@ class BestMoves {
             for(let i = 0; i < data.moves.length; i++) {
                 let move = document.createElement('li');
                 move.setAttribute('id', `${data.moves[i].uci}`);
+                move.dataset.white = data.moves[i].white; 
+                move.dataset.draws = data.moves[i].draws;
+                move.dataset.black = data.moves[i].black;
                 movesReference.appendChild(move);
             }
         })

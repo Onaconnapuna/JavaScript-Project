@@ -1,8 +1,7 @@
-import Board from "./board"
+
 
 class View {
     constructor(viewEl) {
-        this.board = new Board;
         this.viewEl = viewEl;
         this.setupBoard();
         this.colorSquares();

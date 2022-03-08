@@ -9,22 +9,24 @@ class BestMoves {
         this.fenString = fenString;
         this.playedMoves = [fenString];
         this.movesWithoutCapture = 0;
-
         this.displayBestMoves(this.fenString);
 
     }
 
     fetchBestMoves = async(fenString) => {
+      // console.log(fenString)
+
+      // debugger
 
         const movesReference = document.createElement('ul');
         this.viewEl.appendChild(movesReference);
         movesReference.setAttribute("class", "MovesReference");
         // grandmasters : 'https://explorer.lichess.ovh/master?'
         // lichess : 'https://explorer.lichess.ovh/lichess?variant=standard&'
-        await fetch('https://explorer.lichess.ovh/master?' + `${fenString}`)
+        await fetch('https://explorer.lichess.ovh/masters?' + `${fenString}`)
         .then((response) => response.json())
         .then((data) => {
-            
+            console.log(data)
             for(let i = 0; i < data.moves.length; i++) {
                 let move = document.createElement('li');
                 move.setAttribute('id', `${data.moves[i].uci}`);
@@ -73,7 +75,7 @@ class BestMoves {
             } else {
                 counter += 1
             }
-            if ( (i + 1) % 8 === 0) {
+            if ( (i + 1) % 8 === 0 && i + 1 !== 64) {
                 if (counter > 0) {
                     fenString += counter
                     counter = 0
@@ -88,11 +90,12 @@ class BestMoves {
             fenString += " w"
         }
     
-        fenString += ' KQkq '
-        fenString += this.movesWithoutCapture + ' '
-        fenString += this.playedMoves.length + 1 
+        fenString += " KQkq - "
+        fenString += (this.movesWithoutCapture).toString() + " "
+        fenString += (this.playedMoves.length + 1).toString();
     
         this.playedMoves.push(fenString)
+        console.log(fenString)
         return fenString
       }
 
@@ -112,8 +115,6 @@ class BestMoves {
                 let whiteMeter = document.getElementById('white');
                 let drawMeter = document.getElementById('draw')
                 let blackMeter = document.getElementById('black');
-
-                // debugger
 
                 let totalValues = parseInt(moveIcons[i].dataset.white) + parseInt(moveIcons[i].dataset.black) + parseInt(moveIcons[i].dataset.draws)
                 let white = parseInt(moveIcons[i].dataset.white) / totalValues
@@ -178,7 +179,7 @@ class BestMoves {
             moveIcons[i].addEventListener("click", function() {
 
                 //meters
-                let meters = document.getElementById('winMeter')
+                // let meters = document.getElementById('winMeter')
 
                 let whiteMeter = document.getElementById('white');
                 let drawMeter = document.getElementById('draw')
@@ -256,6 +257,7 @@ class BestMoves {
 
 
     displayBestMoves = async(fenString) => { 
+      // console.log(fenString)
 
         await this.fetchBestMoves(fenString);
 

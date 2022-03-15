@@ -3,26 +3,31 @@
   \*************************************************************************************************************************************/
 
   body {
+    height: 100%;
+    width: 100%;
     background-color: rgb(243, 238, 223);
   }
   h1 {
     display: flex;
     justify-content: center;
-    position: relative;
+    /* position: fixed; */
+    text-align: center;
     top: 30px;
     font-size: 40px;
     font-weight: 600;
     font-family: sans-serif;
   }
   #board {
-   position: absolute;
+   height: 100%;
+   width: 100%;
+   /* position: relative; */
   }
   #moves {
     position: absolute;
     z-index: 8;
   }
   .MovesReference {
-    position: relative;
+    /* position: relative; */
     background-color: rgb(243, 238, 223);
     top: 175px;
     left: 500px;
@@ -46,12 +51,15 @@
     border: 4px solid rgb(175, 163, 163);
     display: flex;
     flex-wrap: wrap;
-    position: relative;
-    top: 100px;
-    left: 700px;
+    position: absolute;
+    /* left: 50%;
+    right: 50%;
+    margin-top: 50%;
+    margin-bottom: 50%; */
+    transform: translate(-50%, -50%);
     height: 600px;
     width: 600px;
-    z-index: 8;
+    /* z-index: 8; */
   }
   li {
    border: 1px solid black;
@@ -66,22 +74,22 @@
     background-color: white;
   } 
   li div {
-    position: relative;
+    /* position: relative; */
     vertical-align: center;
     top: 5px;
   }
   li p {
-    position: relative;
+    /* position: relative; */
     z-index: 10;
     font-size: 25px;
     bottom: 75px;
   }
   #winMeter {
-    position: absolute;
+    /* position: absolute; */
   }
   meter {
     display: flex;
-    position: relative;
+    /* position: relative; */
     top: 300px;
     left: 1300px;
     transform: rotate(270deg);
@@ -93,21 +101,21 @@
     color: black;
   }
   #white {
-    position: relative;
+    /* position: relative; */
     left: 1250px;
     top: 400px;
     width: 350px;
     height: 20px;
   }
   #black {
-    position: relative;
+    /* position: relative; */
     left: 1400px;
     top: 360px;
     width: 350px;
     height: 20px;
   }
   #draw {
-    position: relative;
+    /* position: relative; */
     left: 1325px;
     top: 380px;
     width: 350px;
@@ -115,7 +123,7 @@
   }
   #AlphaGrid {
     display: flex;
-    position: relative;
+    /* position: relative; */
     left: 732px;
     top: 720px;
     width: 540px;
@@ -127,7 +135,7 @@
   #OneThroughEight {
     display: flex;
     flex-direction: column;
-    position: relative;
+    /* position: relative; */
     justify-content: space-around;
     /* align-items: flex-start; */
     top: 88px;
@@ -139,7 +147,7 @@
     
   }
   #MeterID {
-    position: relative;
+    /* position: relative; */
     display: flex;
     left: 1400px;
     top: 600px;
@@ -150,7 +158,7 @@
     position: absolute;
   }
   #winMeter h2 {
-    position: relative;
+    /* position: relative; */
     left: 1415px;
     top: 200px;
     width: 175px;
@@ -158,7 +166,7 @@
     justify-content: space-between;
   }
 
-  #Instructions {
+  /* #Instructions {
     display: flex;
     position: relative;
     top: 80px;
@@ -176,174 +184,5 @@
     font-weight: 600;
   }  body {
     background-color: rgb(243, 238, 223);
-  }
-  h1 {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: 30px;
-    font-size: 40px;
-    font-weight: 600;
-    font-family: sans-serif;
-  }
-  #board {
-   position: absolute;
-  }
-  #moves {
-    position: absolute;
-    z-index: 8;
-  }
-  .MovesReference {
-    position: relative;
-    background-color: rgb(243, 238, 223);
-    top: 175px;
-    left: 500px;
-    display: flex;
-    flex-wrap: wrap;
-    width: 150px;
-    z-index: 9;
-    /* vertical-align: middle; */
-  }
-  .MovesReference li {
-    background-color:rgb(247, 238, 215) ;
-    z-index: 9;
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .MovesReference li :hover {
-    cursor: pointer;
-  }
-  .BoardPositions {
-    border: 4px solid rgb(175, 163, 163);
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    top: 100px;
-    left: 700px;
-    height: 600px;
-    width: 600px;
-    z-index: 8;
-  }
-  li {
-   border: 1px solid black;
-   height: 73px;
-   width: 73px;
-   font-size: 73px;
-  }
-  li[data-color = 'black'] {
-    background-color: rgb(175, 163, 163);
-  }
-  li[data-color = 'white'] {
-    background-color: white;
-  } 
-  li div {
-    position: relative;
-    vertical-align: center;
-    top: 5px;
-  }
-  li p {
-    position: relative;
-    z-index: 10;
-    font-size: 25px;
-    bottom: 75px;
-  }
-  #winMeter {
-    position: absolute;
-  }
-  meter {
-    display: flex;
-    position: relative;
-    top: 300px;
-    left: 1300px;
-    transform: rotate(270deg);
-    padding: 0px;
-    border: 0px;
-    margin: 0px;
-  }
-  meter[data-value] {
-    color: black;
-  }
-  #white {
-    position: relative;
-    left: 1250px;
-    top: 400px;
-    width: 350px;
-    height: 20px;
-  }
-  #black {
-    position: relative;
-    left: 1400px;
-    top: 360px;
-    width: 350px;
-    height: 20px;
-  }
-  #draw {
-    position: relative;
-    left: 1325px;
-    top: 380px;
-    width: 350px;
-    height: 20px;
-  }
-  #AlphaGrid {
-    display: flex;
-    position: relative;
-    left: 732px;
-    top: 720px;
-    width: 540px;
-    justify-content: space-between;
-  }
-  #AlphaGrid div {
-    font-size: 20px;
-  }
-  #OneThroughEight {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    justify-content: space-around;
-    /* align-items: flex-start; */
-    top: 88px;
-    left: 670px;
-    height: 600px;
-  }
-  #OneThroughEight div {
-    font-size: 20px;
-    
-  }
-  #MeterID {
-    position: relative;
-    display: flex;
-    left: 1400px;
-    top: 600px;
-    width: 190px;
-    justify-content: space-between;
-  }
-  #winMeter {
-    position: absolute;
-  }
-  #winMeter h2 {
-    position: relative;
-    left: 1415px;
-    top: 200px;
-    width: 175px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  #Instructions {
-    display: flex;
-    position: relative;
-    top: 80px;
-    left: 780px;
-    width: 420px;
-    padding: 10px;
-    border: 2px solid rgb(224, 216, 194);
-    background-color:rgb(247, 238, 215)
-  }
-
-  #Instructions p {
-    font-family: sans-serif;
-    justify-content: center;
-    color: rgb(182, 162, 108) ;
-    font-weight: 600;
-  }
+  }  */
+  

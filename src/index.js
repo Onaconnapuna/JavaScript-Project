@@ -1,7 +1,6 @@
 import View from "./scripts/view"
 window.view = View;
 import BestMoves from './scripts/best_moves'
-import { async } from "regenerator-runtime";
 window.bestMoves = BestMoves;
 import Meter from './scripts/win_meter'
 window.meter = Meter;

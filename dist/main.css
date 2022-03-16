@@ -42,6 +42,10 @@
    align-items: center;
   }
   #moves {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
     /* position: absolute; */
     /* z-index: 8; */
     width: 202px;
@@ -64,7 +68,9 @@
   }
   .MovesReference li :hover {
     cursor: pointer;
+    background-color: rgb(201, 194, 177);
   }
+
   .BoardPositions {
     border: 4px solid rgb(175, 163, 163);
     display: flex;
@@ -95,8 +101,10 @@
   li p {
     position: absolute;
     z-index: 10;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: 600;
     bottom: 1;
+
   }
   #winMeter {
     /* position: absolute; */
@@ -208,3 +216,46 @@
     background-color: rgb(243, 238, 223);
   }  */
   
+#moves-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-container {
+
+}
+
+#reset-button {
+  all: unset;
+  padding: 10px;
+  font-weight: 900;
+  font-size: 30px;
+  border: 1px solid black;
+  background-color: rgb(247, 238, 215);
+}
+
+#reset-button:hover {
+  cursor: pointer;
+  background-color: rgb(201, 194, 177);
+}
+
+#back-button {
+  all: unset;
+  padding: 10px;
+  font-weight: 900;
+  font-size: 30px;
+  border: 1px solid black;
+  background-color: rgb(247, 238, 215);
+}
+
+#back-button:hover {
+  cursor: pointer;
+  background-color: rgb(201, 194, 177);
+}

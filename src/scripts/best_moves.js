@@ -8,15 +8,25 @@ class BestMoves {
         this.boardView = boardView 
         this.fenString = fenString;
         this.playedMoves = [fenString];
+        this.castling = " KQkq - "
         this.movesWithoutCapture = 0;
         this.displayBestMoves(this.fenString);
 
+      if(this.playedMoves.length === 11) {
+        this.resetMoves();
+      }
+    }
+
+    navButtons() {
+      let backButton = document.getElementById('back-button')
+      let resetButton = document.getElementById('reset-button')
+
+      resetButton.addEventListener("mousedown", function() {
+        this.resetMoves();
+      })
     }
 
     fetchBestMoves = async(fenString) => {
-      // console.log(fenString)
-
-      // debugger
 
         const movesReference = document.createElement('ul');
         this.viewEl.appendChild(movesReference);
@@ -90,7 +100,7 @@ class BestMoves {
             fenString += " w"
         }
     
-        fenString += " KQkq - "
+        fenString += this.castling
         fenString += (this.movesWithoutCapture).toString() + " "
         fenString += (this.playedMoves.length + 1).toString();
     
@@ -278,6 +288,25 @@ class BestMoves {
             moveIcons[i].appendChild(posReference)
         }
         
+
+        // for(let i = 0; i < moveIcons.length; i++){ 
+        //   moveIcons[i].addEventListener("click", () => {
+        //     let newfenString = this.generateFenString();
+        //     this.fenString = newfenString;
+
+        //     // if (this.playedMoves.length === 11) {
+        //     //     this.fenString = startingFen;
+        //     //     this.playedMoves = [startingFen];
+        //     //     let movesTable = document.getElementById('moves')
+        //     //     this.boardView.placePieces();
+        //     //     this.displayBestMoves(startingFen);
+        //     //     movesTable.removeChild(table[0])
+        //     //   }
+            
+
+        //     // this.displayBestMoves(this.fenString);
+        //   })
+        // }
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();

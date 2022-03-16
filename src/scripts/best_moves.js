@@ -12,17 +12,31 @@ class BestMoves {
         this.movesWithoutCapture = 0;
         this.displayBestMoves(this.fenString);
 
-      if(this.playedMoves.length === 11) {
-        this.resetMoves();
-      }
+        // this.displayBestMoves = this.displayBestMoves.bind(this)
+
+      // if(this.playedMoves.length === 11) {
+      //   this.resetMoves();
+      // }
     }
+
+    // moveCounter() {
+    //   counter = document.getElementById('move-counter') 
+    //   counter.innerHTML += `${this.playedMoves.length}`
+    // }
 
     navButtons() {
       let backButton = document.getElementById('back-button')
       let resetButton = document.getElementById('reset-button')
 
+      let playedMoves = this.playedMoves
+
       resetButton.addEventListener("mousedown", function() {
-        this.resetMoves();
+        location.reload()
+      })
+
+      backButton.addEventListener("mousedown", function() {
+        playedMoves.pop()
+        // this.displayBestMoves(playedMoves[playedMoves.length - 1])
       })
     }
 
@@ -36,7 +50,6 @@ class BestMoves {
         await fetch('https://explorer.lichess.ovh/masters?' + `${fenString}`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
             for(let i = 0; i < data.moves.length; i++) {
                 let move = document.createElement('li');
                 move.setAttribute('id', `${data.moves[i].uci}`);
@@ -105,7 +118,6 @@ class BestMoves {
         fenString += (this.playedMoves.length + 1).toString();
     
         this.playedMoves.push(fenString)
-        console.log(fenString)
         return fenString
       }
 
@@ -165,11 +177,13 @@ class BestMoves {
             this.fenString = newfenString;
 
             if (this.playedMoves.length === 11) {
+                // table.removeChild()
                 this.fenString = startingFen;
-                this.playedMoves = [startingFen];
+                this.playedMoves = [];
+                this.playedMoves.push(startingFen)
                 let movesTable = document.getElementById('moves')
-                this.boardView.placePieces();
-                this.displayBestMoves(startingFen);
+                // this.boardView.placePieces();
+                // this.displayBestMoves(startingFen);
                 movesTable.removeChild(table[0])
               }
             
@@ -180,6 +194,7 @@ class BestMoves {
       }
 
     movePiece() {
+        
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
 
@@ -271,6 +286,10 @@ class BestMoves {
 
         await this.fetchBestMoves(fenString);
 
+        let counter = document.getElementById('move-counter') 
+        counter.innerHTML = ''
+        counter.innerHTML += `${this.playedMoves.length}/10`
+
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
 
@@ -287,30 +306,12 @@ class BestMoves {
             moveIcons[i].appendChild(piece);
             moveIcons[i].appendChild(posReference)
         }
-        
-
-        // for(let i = 0; i < moveIcons.length; i++){ 
-        //   moveIcons[i].addEventListener("click", () => {
-        //     let newfenString = this.generateFenString();
-        //     this.fenString = newfenString;
-
-        //     // if (this.playedMoves.length === 11) {
-        //     //     this.fenString = startingFen;
-        //     //     this.playedMoves = [startingFen];
-        //     //     let movesTable = document.getElementById('moves')
-        //     //     this.boardView.placePieces();
-        //     //     this.displayBestMoves(startingFen);
-        //     //     movesTable.removeChild(table[0])
-        //     //   }
-            
-
-        //     // this.displayBestMoves(this.fenString);
-        //   })
-        // }
+    
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();
-        
+        this.navButtons();
+        // this.moveCounter();
     } 
 
 }

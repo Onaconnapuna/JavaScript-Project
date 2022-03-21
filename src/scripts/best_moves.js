@@ -26,10 +26,6 @@ class BestMoves {
 
     navButtons() {
 
-      // let table = document.getElementsByClassName('MovesReference');
-      // let moveIcons = table[0].childNodes;
-
-
       let backButton = document.getElementById('back-button')
       let resetButton = document.getElementById('reset-button')
 

@@ -44,13 +44,13 @@ class BestMoves {
       })
 
       backButton.addEventListener("mousedown", function() {
-        playedMoves.pop()
-        this.fenString = playedMoves[playedMoves.length - 1]
+        if (playedMoves.length > 1) {
 
-        // console.log('I fired')
-        placePiecesFen(this.fenString)
-        // movePiece()
-        displayBestMoves(this.fenString)
+          playedMoves.pop()
+          this.fenString = playedMoves[playedMoves.length - 1]
+          placePiecesFen(this.fenString)
+          displayBestMoves(this.fenString)
+        }
 
       })
     }
@@ -197,8 +197,8 @@ class BestMoves {
                 this.playedMoves = [];
                 this.playedMoves.push(startingFen)
                 let movesTable = document.getElementById('moves')
-                // this.boardView.placePieces();
-                // this.displayBestMoves(startingFen);
+                this.boardView.placePieces();
+                this.displayBestMoves(startingFen);
                 movesTable.removeChild(table[0])
               }
             

@@ -25,10 +25,19 @@ class BestMoves {
     // }
 
     navButtons() {
+
+      let table = document.getElementsByClassName('MovesReference');
+      let moveIcons = table[0].childNodes;
+
+
       let backButton = document.getElementById('back-button')
       let resetButton = document.getElementById('reset-button')
 
       let playedMoves = this.playedMoves
+
+      let placePiecesFen = this.boardView.placePiecesFen.bind(this)
+      let displayBestMoves = this.displayBestMoves.bind(this)
+      // let movePiece = this.movePiece.bind(this)
 
       resetButton.addEventListener("mousedown", function() {
         location.reload()
@@ -36,7 +45,13 @@ class BestMoves {
 
       backButton.addEventListener("mousedown", function() {
         playedMoves.pop()
-        // this.displayBestMoves(playedMoves[playedMoves.length - 1])
+        this.fenString = playedMoves[playedMoves.length - 1]
+
+        // console.log('I fired')
+        placePiecesFen(this.fenString)
+        // movePiece()
+        displayBestMoves(this.fenString)
+
       })
     }
 
@@ -187,7 +202,7 @@ class BestMoves {
                 movesTable.removeChild(table[0])
               }
             
-
+            
             this.displayBestMoves(this.fenString);
           })
         }
@@ -204,7 +219,6 @@ class BestMoves {
             moveIcons[i].addEventListener("click", function() {
 
                 //meters
-                // let meters = document.getElementById('winMeter')
 
                 let whiteMeter = document.getElementById('white');
                 let drawMeter = document.getElementById('draw')
@@ -310,7 +324,7 @@ class BestMoves {
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();
-        this.navButtons();
+        // this.navButtons();
         // this.moveCounter();
     } 
 

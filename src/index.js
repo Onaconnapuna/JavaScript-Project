@@ -13,5 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   view.placePieces();
   const movesTable = document.getElementById("moves");
   let moves = new BestMoves(movesTable, view, currentFen);
+  moves.navButtons();
   let meter = new Meter();
 })

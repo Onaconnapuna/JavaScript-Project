@@ -8,7 +8,7 @@ class BestMoves {
         this.boardView = boardView 
         this.fenString = fenString;
         this.playedMoves = [fenString];
-        this.castling = " KQkq - "
+        this.castlingEval = " KQkq - "
         this.movesWithoutCapture = 0;
         this.displayBestMoves(this.fenString);
 
@@ -26,8 +26,8 @@ class BestMoves {
 
     navButtons() {
 
-      let table = document.getElementsByClassName('MovesReference');
-      let moveIcons = table[0].childNodes;
+      // let table = document.getElementsByClassName('MovesReference');
+      // let moveIcons = table[0].childNodes;
 
 
       let backButton = document.getElementById('back-button')
@@ -99,6 +99,9 @@ class BestMoves {
     
         let fenString = "fen="
         let counter = 0
+
+        let whiteCastled = false
+        let blackCastled = false
     
         for(let i = 0; i < squares.length; i++) {
     
@@ -110,6 +113,14 @@ class BestMoves {
                 let childNode = squares[i].childNodes[0];
                 let code = childNode.innerHTML.charCodeAt(0);
                 fenString += pieces[code.toString()]
+
+                if (pieces[code.toString()] === 'k' && i === 6) {
+                  blackCastled = true
+                }
+
+                if (pieces[code.toString()] === 'K' && i === 62) {
+                  whiteCastled = true
+                }
             } else {
                 counter += 1
             }
@@ -119,6 +130,12 @@ class BestMoves {
                     counter = 0
                 }
                 fenString += '/'
+            } 
+
+            if (i === 63) {
+              if(!squares[i].hasChildNodes()) {
+                fenString += '1'
+              }
             }
         }
         
@@ -127,8 +144,16 @@ class BestMoves {
         } else {
             fenString += " w"
         }
+
+        if (whiteCastled && blackCastled) {
+          this.castlingEval = ' - - '
+        } else if (whiteCastled && !blackCastled) {
+          this.castlingEval = ' kq - '
+        } else if (!whiteCastled && blackCastled) {
+          this.castlingEval = ' KQ - '
+        }
     
-        fenString += this.castling
+        fenString += this.castlingEval
         fenString += (this.movesWithoutCapture).toString() + " "
         fenString += (this.playedMoves.length + 1).toString();
     
@@ -179,7 +204,7 @@ class BestMoves {
                 let blackMeter = document.getElementById('black');
 
                 let totalValues = parseInt(moveIcons[i].dataset.white) + parseInt(moveIcons[i].dataset.black) + parseInt(moveIcons[i].dataset.draws)
-                console.log(totalValues)
+
                 let white = parseInt(moveIcons[i].dataset.white) / totalValues
                 let draw = parseInt(moveIcons[i].dataset.draws) / totalValues
                 let black = parseInt(moveIcons[i].dataset.black) / totalValues
@@ -189,19 +214,6 @@ class BestMoves {
                 drawMeter.style.height = `${Math.round(draw * 100)-.1}%`;
                 blackMeter.style.height = `${Math.round(black * 100)-.1}%`;
 
-                // let whiteMeterPercentage = document.getElementById('white-percentage');
-                // let drawMeterPercentage = document.getElementById('draw-percentage')
-                // let blackMeterPercentage = document.getElementById('black-percentage');
-
-                // whiteMeterPercentage.innerText = `${Math.round(white * 100)}%`;
-                // drawMeterPercentage.innerText = `${Math.round(draw * 100)}%`;
-                // blackMeterPercentage.innerText = `${Math.round(black * 100)}%`;
-
-
-
-                // whiteMeter.value = Math.round(white * 100)
-                // drawMeter.value = Math.round(draw * 100)
-                // blackMeter.value = Math.round(black * 100)
             })
             moveIcons[i].addEventListener('mouseout', function() {
 
@@ -222,17 +234,6 @@ class BestMoves {
                 drawMeter.style.height = `${drawMeterPercentage.innerHTML}`;
                 blackMeter.style.height = `${blackMeterPercentage.innerHTML}`;
 
-                // whiteMeterPercentage.innerText = `${Math.round(white * 100)}%`;
-                // drawMeterPercentage.innerText = `${Math.round(draw * 100)}%`;
-                // blackMeterPercentage.innerText = `${Math.round(black * 100)}%`;
-
-                // let whiteMeter = document.getElementById('white');
-                // let drawMeter = document.getElementById('draw')
-                // let blackMeter = document.getElementById('black');
-
-                // whiteMeter.value = 0
-                // drawMeter.value = 0
-                // blackMeter.value = 0
             })
         }
     }
@@ -249,23 +250,74 @@ class BestMoves {
             this.fenString = newfenString;
 
             if (this.playedMoves.length === 11) {
-                // table.removeChild()
-                this.fenString = startingFen;
-                this.playedMoves = [];
-                this.playedMoves.push(startingFen)
-                let movesTable = document.getElementById('moves')
-                this.boardView.placePieces();
-                this.displayBestMoves(startingFen);
-                movesTable.removeChild(table[0])
+                // this.fenString = startingFen;
+                // this.playedMoves = [];
+                // this.playedMoves.push(startingFen)
+                // let movesTable = document.getElementById('moves')
+                // this.boardView.placePieces();
+                // this.displayBestMoves(startingFen);
+                // movesTable.removeChild(table[0])
+                location.reload();
               }
             
             
             this.displayBestMoves(this.fenString);
           })
         }
-      }
+    }
+      
 
     movePiece() {
+      let castlingEval = this.castlingEval
+
+      const castling = function(id) {
+        if (id === 'h1') {
+          let rookSquare = document.getElementById('h1')
+          let kingSquare = document.getElementById('e1')
+  
+          let rook = rookSquare.childNodes[0]
+          let rookCode = rook.innerHTML.charCodeAt(0);
+          let movedRook = document.createElement('div')
+          movedRook.innerHTML = `&#${rookCode}`
+  
+          let king = kingSquare.childNodes[0]
+          let kingCode = king.innerHTML.charCodeAt(0);
+          let movedKing = document.createElement('div')
+          movedKing.innerHTML = `&#${kingCode}`
+  
+          let castledRook = document.getElementById('f1')
+          castledRook.appendChild(movedRook)
+  
+          let castledKing = document.getElementById('g1')
+          castledKing.appendChild(movedKing)
+  
+          rookSquare.removeChild(rookSquare.childNodes[0])
+          kingSquare.removeChild(kingSquare.childNodes[0])
+        } else if (id === 'h8') {
+
+          let rookSquare = document.getElementById('h8')
+          let kingSquare = document.getElementById('e8')
+  
+          let rook = rookSquare.childNodes[0]
+          let rookCode = rook.innerHTML.charCodeAt(0);
+          let movedRook = document.createElement('div')
+          movedRook.innerHTML = `&#${rookCode}`
+  
+          let king = kingSquare.childNodes[0]
+          let kingCode = king.innerHTML.charCodeAt(0);
+          let movedKing = document.createElement('div')
+          movedKing.innerHTML = `&#${kingCode}`
+  
+          let castledRook = document.getElementById('f8')
+          castledRook.appendChild(movedRook)
+  
+          let castledKing = document.getElementById('g8')
+          castledKing.appendChild(movedKing)
+  
+          rookSquare.removeChild(rookSquare.childNodes[0])
+          kingSquare.removeChild(kingSquare.childNodes[0])
+        }
+      }
         
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
@@ -274,6 +326,35 @@ class BestMoves {
             let firstPosID = moveIcons[i].id.split('').slice(0, 2).join('');
             let lastPosID = moveIcons[i].id.split('').slice(2).join('');
             moveIcons[i].addEventListener("click", function() {
+
+                //retrieving elements
+
+                let startingPosElement = document.getElementById(firstPosID);
+                let endingPosElement = document.getElementById(lastPosID);
+                startingPosElement.style.backgroundColor = null;
+                endingPosElement.style.backgroundColor = null;
+                
+                let piece = startingPosElement.childNodes[0]
+                let code = piece.innerHTML.charCodeAt(0);
+                let movedPiece = document.createElement('div')
+                movedPiece.innerHTML = `&#${code}`
+
+                // moving the piece
+
+                if (endingPosElement.id === 'h8' || endingPosElement.id === 'h1') {
+                  castling(endingPosElement.id);
+                  if (castlingEval.includes('K')) {
+                    castlingEval = ' kq -'
+                  }
+                } else if (endingPosElement.hasChildNodes()) { 
+                    endingPosElement.removeChild(endingPosElement.childNodes[0])
+                    startingPosElement.removeChild(startingPosElement.childNodes[0])
+                    endingPosElement.appendChild(movedPiece)
+                    this.movesWithoutCapture = 0
+                } else {
+                  endingPosElement.appendChild(movedPiece)
+                  startingPosElement.removeChild(startingPosElement.childNodes[0])
+                }
 
                 //meters
 
@@ -289,8 +370,6 @@ class BestMoves {
                 let white = parseInt(moveIcons[i].dataset.white) / totalValues;
                 let draw = parseInt(moveIcons[i].dataset.draws) / totalValues;
                 let black = parseInt(moveIcons[i].dataset.black) / totalValues;
-                
-                
 
                 whiteMeter.style.height = `${Math.round(white * 100) -.1}%`;
                 drawMeter.style.height = `${Math.round(draw * 100) -.1}%`;
@@ -300,36 +379,20 @@ class BestMoves {
                 drawMeterPercentage.innerText = `${Math.round(draw * 100)}%`;
                 blackMeterPercentage.innerText = `${Math.round(black * 100)}%`;
 
-
-
-                //retrieving elements
-
-                let startingPosElement = document.getElementById(firstPosID);
-                let endingPosElement = document.getElementById(lastPosID);
-                startingPosElement.style.backgroundColor = null;
-                endingPosElement.style.backgroundColor = null;
-                let piece = startingPosElement.childNodes[0]
-                let code = piece.innerHTML.charCodeAt(0);
-                let movedPiece = document.createElement('div')
-                movedPiece.innerHTML = `&#${code}`
-
-                // moving the piece
-                if (endingPosElement.hasChildNodes()) {
-                    endingPosElement.removeChild(endingPosElement.childNodes[0])
-                    this.movesWithoutCapture = 0
-                }
-                endingPosElement.appendChild(movedPiece)
-                startingPosElement.removeChild(startingPosElement.childNodes[0])
-
+                
                 // removing options from table
                 table[0].removeChild(moveIcons[i])
                 while (table[0].firstChild) {
-                    table[0].removeChild(table[0].firstChild)
+                  table[0].removeChild(table[0].firstChild)
                 }
                 let movesTable = document.getElementById('moves')
                 movesTable.removeChild(table[0])
+
+                //meters
             })
-        }
+
+          }
+          
     }
 
 
@@ -363,8 +426,6 @@ class BestMoves {
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();
-        // this.navButtons();
-        // this.moveCounter();
     } 
 
 }

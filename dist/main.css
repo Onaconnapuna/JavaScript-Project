@@ -234,12 +234,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* position: absolute; */
 }
 
 #buttons {
   margin-top: 50px;
   display: flex;
   justify-content: space-around;
+  /* position: absolute; */
+
 }
 
 

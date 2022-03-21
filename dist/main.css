@@ -13,7 +13,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 5%
+    margin-top: 30px
   }
 
   /* #main-interface div {
@@ -106,44 +106,75 @@
     bottom: 1;
 
   }
-  #winMeter {
-    /* position: absolute; */
+  #meter-container {
     width: 202px;
-  }
-  meter {
     display: flex;
-    /* position: relative; */
-    top: 300px;
-    left: 1300px;
-    transform: rotate(270deg);
-    padding: 0px;
-    border: 0px;
-    margin: 0px;
+    flex-direction: column;
+    align-items: center;
   }
-  meter[data-value] {
+  #meter {
+    height: 100%;
+    overflow: hidden;
+    width: 40px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* meter[data-value] {
     color: black;
-  }
+  } */
   #white {
-    /* position: relative; */
-    left: 1250px;
-    top: 400px;
-    width: 350px;
-    height: 20px;
+    height: 33%;
+    background-color: white;
   }
+
   #black {
     /* position: relative; */
-    left: 1400px;
-    top: 360px;
-    width: 350px;
-    height: 20px;
+    height: 33%;
+    background-color: black;
   }
   #draw {
     /* position: relative; */
-    left: 1325px;
-    top: 380px;
-    width: 350px;
-    height: 20px;
+    height: 33%;
+    background-color: gray
   }
+
+  #black-percentage {
+    display: none;
+    /* height: 100%; */
+    font-weight: 600;
+    color: white;
+  }
+
+  #draw-percentage {
+    display: none;
+    /* height: 100%; */
+    font-weight: 600;
+    color: black;
+  }
+
+  #white-percentage {
+    display: none;
+    /* visibility: hidden; */
+    /* height: 100%; */
+    font-weight: 600;
+    color: black;
+  }
+
+  /* #black-percentage:hover {
+    display: block;
+  }
+
+  #draw-percentage:hover {
+    display: block;
+  }
+
+  #white-percentage:hover {
+    display: block;
+  } */
+  
+
   #AlphaGrid {
     margin-top: 10px;
     display: flex;
@@ -178,23 +209,6 @@
     font-size: 20px;
     
   }
-  #MeterID {
-    /* position: relative; */
-    display: flex;
-    left: 1400px;
-    top: 600px;
-    width: 190px;
-    justify-content: space-between;
-  }
-
-  #winMeter h2 {
-    /* position: relative; */
-    left: 1415px;
-    top: 200px;
-    width: 175px;
-    display: flex;
-    justify-content: space-between;
-  }
 
   /* #Instructions {
     display: flex;
@@ -228,9 +242,6 @@
   justify-content: space-around;
 }
 
-.button-container {
-
-}
 
 #reset-button {
   all: unset;
@@ -258,4 +269,12 @@
 #back-button:hover {
   cursor: pointer;
   background-color: rgb(201, 194, 177);
+}
+
+#move-counter {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: 10px;
 }

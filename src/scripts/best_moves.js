@@ -136,6 +136,31 @@ class BestMoves {
         return fenString
       }
 
+      hoverOverMeters() {
+        let meter = document.getElementById('meter-container')
+
+        meter.addEventListener('mouseover', function() {
+          let meterWhite = document.getElementById('white-percentage')
+          let meterBlack = document.getElementById('black-percentage')
+          let meterDraw = document.getElementById('draw-percentage')
+
+          meterWhite.style.display = 'block';
+          meterBlack.style.display = 'block';
+          meterDraw.style.display = 'block';
+        })
+
+        meter.addEventListener('mouseout', () => {
+          let meterWhite = document.getElementById('white-percentage')
+          let meterBlack = document.getElementById('black-percentage')
+          let meterDraw = document.getElementById('draw-percentage')
+
+          meterWhite.style.display = 'none';
+          meterBlack.style.display = 'none';
+          meterDraw.style.display = 'none';
+        })
+
+      }
+
     hoverOverMove() {
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
@@ -154,13 +179,29 @@ class BestMoves {
                 let blackMeter = document.getElementById('black');
 
                 let totalValues = parseInt(moveIcons[i].dataset.white) + parseInt(moveIcons[i].dataset.black) + parseInt(moveIcons[i].dataset.draws)
+                console.log(totalValues)
                 let white = parseInt(moveIcons[i].dataset.white) / totalValues
                 let draw = parseInt(moveIcons[i].dataset.draws) / totalValues
-                let black = parseInt(moveIcons[i].dataset.white) / totalValues
+                let black = parseInt(moveIcons[i].dataset.black) / totalValues
 
-                whiteMeter.value = Math.round(white * 100)
-                drawMeter.value = Math.round(draw * 100)
-                blackMeter.value = Math.round(black * 100)
+
+                whiteMeter.style.height = `${Math.round(white * 100) -.1}%`;
+                drawMeter.style.height = `${Math.round(draw * 100)-.1}%`;
+                blackMeter.style.height = `${Math.round(black * 100)-.1}%`;
+
+                // let whiteMeterPercentage = document.getElementById('white-percentage');
+                // let drawMeterPercentage = document.getElementById('draw-percentage')
+                // let blackMeterPercentage = document.getElementById('black-percentage');
+
+                // whiteMeterPercentage.innerText = `${Math.round(white * 100)}%`;
+                // drawMeterPercentage.innerText = `${Math.round(draw * 100)}%`;
+                // blackMeterPercentage.innerText = `${Math.round(black * 100)}%`;
+
+
+
+                // whiteMeter.value = Math.round(white * 100)
+                // drawMeter.value = Math.round(draw * 100)
+                // blackMeter.value = Math.round(black * 100)
             })
             moveIcons[i].addEventListener('mouseout', function() {
 
@@ -172,10 +213,26 @@ class BestMoves {
                 let whiteMeter = document.getElementById('white');
                 let drawMeter = document.getElementById('draw')
                 let blackMeter = document.getElementById('black');
+                
+                let whiteMeterPercentage = document.getElementById('white-percentage');
+                let drawMeterPercentage = document.getElementById('draw-percentage')
+                let blackMeterPercentage = document.getElementById('black-percentage');
 
-                whiteMeter.value = 0
-                drawMeter.value = 0
-                blackMeter.value = 0
+                whiteMeter.style.height = `${whiteMeterPercentage.innerHTML}`;
+                drawMeter.style.height = `${drawMeterPercentage.innerHTML}`;
+                blackMeter.style.height = `${blackMeterPercentage.innerHTML}`;
+
+                // whiteMeterPercentage.innerText = `${Math.round(white * 100)}%`;
+                // drawMeterPercentage.innerText = `${Math.round(draw * 100)}%`;
+                // blackMeterPercentage.innerText = `${Math.round(black * 100)}%`;
+
+                // let whiteMeter = document.getElementById('white');
+                // let drawMeter = document.getElementById('draw')
+                // let blackMeter = document.getElementById('black');
+
+                // whiteMeter.value = 0
+                // drawMeter.value = 0
+                // blackMeter.value = 0
             })
         }
     }
@@ -224,42 +281,24 @@ class BestMoves {
                 let drawMeter = document.getElementById('draw')
                 let blackMeter = document.getElementById('black');
 
+                let whiteMeterPercentage = document.getElementById('white-percentage');
+                let drawMeterPercentage = document.getElementById('draw-percentage')
+                let blackMeterPercentage = document.getElementById('black-percentage');
+
                 let totalValues = parseInt(moveIcons[i].dataset.white) + parseInt(moveIcons[i].dataset.black) + parseInt(moveIcons[i].dataset.draws);
                 let white = parseInt(moveIcons[i].dataset.white) / totalValues;
                 let draw = parseInt(moveIcons[i].dataset.draws) / totalValues;
-                let black = parseInt(moveIcons[i].dataset.white) / totalValues;
+                let black = parseInt(moveIcons[i].dataset.black) / totalValues;
+                
+                
 
-                whiteMeter.value = Math.round(white * 100);
-                drawMeter.value = Math.round(draw * 100);
-                blackMeter.value = Math.round(black * 100);
+                whiteMeter.style.height = `${Math.round(white * 100) -.1}%`;
+                drawMeter.style.height = `${Math.round(draw * 100) -.1}%`;
+                blackMeter.style.height = `${Math.round(black * 100) -.1}%`;
 
-                let metersContainer = document.getElementById('metersContainer')
-                let metersValues = metersContainer.childNodes;
-
-                if (metersValues.length !== 0) {
-                    
-                    for(let i = 0; i < 3; i++) {
-                       
-                        metersContainer.removeChild(metersValues[0])
-                    }
-                }
-
-
-                let valueWhite = document.createElement('div');
-                let whiteContent = document.createTextNode(`${whiteMeter.value}%`)
-                valueWhite.appendChild(whiteContent);
-                // meters.appendChild(valueWhite);
-                metersContainer.appendChild(valueWhite)
-                let valueDraws = document.createElement('div');
-                let drawsContent = document.createTextNode(`${drawMeter.value}%`)
-                valueDraws.appendChild(drawsContent);
-                // meters.appendChild(valueDraws);
-                metersContainer.appendChild(valueDraws)
-                let valueBlack = document.createElement('div');
-                let blackContent = document.createTextNode(`${blackMeter.value}%`)
-                valueBlack.appendChild(blackContent);
-                // meters.appendChild(valueBlack)
-                metersContainer.appendChild(valueBlack)
+                whiteMeterPercentage.innerText = `${Math.round(white * 100)}%`;
+                drawMeterPercentage.innerText = `${Math.round(draw * 100)}%`;
+                blackMeterPercentage.innerText = `${Math.round(black * 100)}%`;
 
 
 
@@ -320,7 +359,7 @@ class BestMoves {
             moveIcons[i].appendChild(piece);
             moveIcons[i].appendChild(posReference)
         }
-    
+        this.hoverOverMeters();
         this.hoverOverMove();
         this.movePiece();
         this.resetMoves();

@@ -12,17 +12,7 @@ class BestMoves {
         this.movesWithoutCapture = 0;
         this.displayBestMoves(this.fenString);
 
-        // this.displayBestMoves = this.displayBestMoves.bind(this)
-
-      // if(this.playedMoves.length === 11) {
-      //   this.resetMoves();
-      // }
     }
-
-    // moveCounter() {
-    //   counter = document.getElementById('move-counter') 
-    //   counter.innerHTML += `${this.playedMoves.length}`
-    // }
 
     navButtons() {
 
@@ -33,8 +23,7 @@ class BestMoves {
 
       let placePiecesFen = this.boardView.placePiecesFen.bind(this)
       let displayBestMoves = this.displayBestMoves.bind(this)
-      // let movePiece = this.movePiece.bind(this)
-
+    
       resetButton.addEventListener("mousedown", function() {
         location.reload()
       })
@@ -83,7 +72,7 @@ class BestMoves {
             '9816': 'N',
             '9815': 'B',
             '9813': 'Q',
-            '9812': 'K', 
+            '9812': 'K',  
             '9817': 'P',
             '9820': 'r',
             '9822': 'n',
@@ -103,42 +92,42 @@ class BestMoves {
     
             if (squares[i].hasChildNodes()) {
                 if (counter > 0) {
-                    fenString += counter
-                    counter = 0
+                    fenString += counter;
+                    counter = 0;
                 }
                 let childNode = squares[i].childNodes[0];
                 let code = childNode.innerHTML.charCodeAt(0);
-                fenString += pieces[code.toString()]
+                fenString += pieces[code.toString()];
 
                 if (pieces[code.toString()] === 'k' && i === 6) {
-                  blackCastled = true
+                  blackCastled = true;
                 }
 
                 if (pieces[code.toString()] === 'K' && i === 62) {
-                  whiteCastled = true
+                  whiteCastled = true;
                 }
             } else {
                 counter += 1
             }
             if ( (i + 1) % 8 === 0 && i + 1 !== 64) {
                 if (counter > 0) {
-                    fenString += counter
-                    counter = 0
+                    fenString += counter;
+                    counter = 0;
                 }
-                fenString += '/'
+                fenString += '/';
             } 
 
             if (i === 63) {
               if(!squares[i].hasChildNodes()) {
-                fenString += '1'
+                fenString += '1';
               }
             }
         }
         
         if (this.playedMoves[this.playedMoves.length - 1].includes('w')) {
-            fenString += " b"
+            fenString += " b";
         } else {
-            fenString += " w"
+            fenString += " w";
         }
 
         if (whiteCastled && blackCastled) {
@@ -237,7 +226,7 @@ class BestMoves {
     resetMoves() {
         let table = document.getElementsByClassName('MovesReference');
         let moveIcons = table[0].childNodes;
-        let startingFen = 'fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201'
+        // let startingFen = 'fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201'
         
         
         for(let i = 0; i < moveIcons.length; i++){ 

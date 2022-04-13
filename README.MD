@@ -15,11 +15,11 @@ Here is a wireframe of the layout of the page going into development.
   * HTML and CSS for structure and styling
   * Babel and Webpack for testing and development
 
-The following function utilizes the JavaScript fetch method to asertain the best moves played by any given position. This function takes in a fenString (more on that later) and queries the lichess.org API for games played by chess grandmasters. After awaiting the fetch, we create a series of li elements and append them to a ul element which will display each move (see the wireframe). 
+The following function utilizes the JavaScript fetch method to ascertain the best moves played by any given position. This function takes in a fenString (more on that later) and queries the lichess.org API for games played by chess grandmasters in which that positon was present. After awaiting the fetch, we create a series of li elements and append them to a ul element which will display each move (see the wireframe). 
 
 ![alt text](./fetchBestMoves.PNG)
 
-The main custom function that makes the application possible is the generateFenString function. Chess and computor science share some history together, going back to Deep Blue (an AI) defeated the chess world champion Garry Kasporov. 'FEN' is an abbreviation for Forsyth-Edwards Notation, a string that represents the postion of a chess board. 
+The main custom function that makes the application possible is the generateFenString function. Chess and computor science share some history together, going back to Deep Blue (an AI) defeating the chess world champion Garry Kasporov. 'FEN' is an abbreviation for Forsyth-Edwards Notation, a string that represents the postion of a chess board. 
 
 The following is a an example of a FEN string which denotes a starting positon: 
 

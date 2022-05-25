@@ -68,18 +68,18 @@ class BestMoves {
         let squares = board.childNodes;
     
         let pieces = {
-            '9814': 'R',
-            '9816': 'N',
-            '9815': 'B',
-            '9813': 'Q',
-            '9812': 'K',  
-            '9817': 'P',
-            '9820': 'r',
-            '9822': 'n',
-            '9821': 'b',
-            '9819': 'q',
-            '9818': 'k',
-            '9823': 'p'
+            '<img src="../../pieces/rook_w.png">': 'R',
+            '<img src="../../pieces/knight_w.png">': 'N',
+            '<img src="../../pieces/bishop_w.png">': 'B',
+            '<img src="../../pieces/queen_w.png">': 'Q',
+            '<img src="../../pieces/king_w.png">': 'K',  
+            '<img src="../../pieces/pawn_w.png">': 'P',
+            '<img src="../../pieces/rook_b.png">': 'r',
+            '<img src="../../pieces/knight_b.png">': 'n',
+            '<img src="../../pieces/bishop_b.png">': 'b',
+            '<img src="../../pieces/queen_b.png">': 'q',
+            '<img src="../../pieces/king_b.png">': 'k',
+            '<img src="../../pieces/pawn_b.png">': 'p'
         }
     
         let fenString = "fen="
@@ -96,7 +96,8 @@ class BestMoves {
                     counter = 0;
                 }
                 let childNode = squares[i].childNodes[0];
-                let code = childNode.innerHTML.charCodeAt(0);
+                // let code = childNode.innerHTML.charCodeAt(0);
+                let code = childNode.innerHTML
                 fenString += pieces[code.toString()];
 
                 if (pieces[code.toString()] === 'k' && i === 6) {
@@ -143,6 +144,7 @@ class BestMoves {
         fenString += (this.playedMoves.length + 1).toString();
     
         this.playedMoves.push(fenString)
+        console.log(fenString)
         return fenString
       }
 
@@ -250,6 +252,7 @@ class BestMoves {
           })
         }
     }
+
       
 
     movePiece() {
@@ -257,18 +260,22 @@ class BestMoves {
 
       const castling = function(id) {
         if (id === 'h1') {
-          let rookSquare = document.getElementById('h1')
-          let kingSquare = document.getElementById('e1')
+          let rookSquare = document.getElementById('h1');
+          let kingSquare = document.getElementById('e1');
   
-          let rook = rookSquare.childNodes[0]
-          let rookCode = rook.innerHTML.charCodeAt(0);
-          let movedRook = document.createElement('div')
-          movedRook.innerHTML = `&#${rookCode}`
+          let rook = rookSquare.childNodes[0];
+          // let rookCode = rook.innerHTML.charCodeAt(0);
+          let rookCode = rook.innerHTML;
+          let movedRook = document.createElement('div');
+          // movedRook.innerHTML = `&#${rookCode}`
+          movedRook.innerHTML = rookCode;
   
           let king = kingSquare.childNodes[0]
-          let kingCode = king.innerHTML.charCodeAt(0);
+          // let kingCode = king.innerHTML.charCodeAt(0);
+          let kingCode = king.innerHTML;
           let movedKing = document.createElement('div')
-          movedKing.innerHTML = `&#${kingCode}`
+          // movedKing.innerHTML = `&#${kingCode}`
+          movedKing.innerHTML = kingCode; 
   
           let castledRook = document.getElementById('f1')
           castledRook.appendChild(movedRook)
@@ -283,15 +290,19 @@ class BestMoves {
           let rookSquare = document.getElementById('h8')
           let kingSquare = document.getElementById('e8')
   
-          let rook = rookSquare.childNodes[0]
-          let rookCode = rook.innerHTML.charCodeAt(0);
-          let movedRook = document.createElement('div')
-          movedRook.innerHTML = `&#${rookCode}`
+          let rook = rookSquare.childNodes[0];
+          // let rookCode = rook.innerHTML.charCodeAt(0);
+          let rookCode = rook.innerHTML;
+          let movedRook = document.createElement('div');
+          movedRook.innerHTML = rookCode;
+          // movedRook.innerHTML = `&#${rookCode}`
   
           let king = kingSquare.childNodes[0]
-          let kingCode = king.innerHTML.charCodeAt(0);
-          let movedKing = document.createElement('div')
-          movedKing.innerHTML = `&#${kingCode}`
+          // let kingCode = king.innerHTML.charCodeAt(0);
+          let kingCode = king.innerHTML;
+          let movedKing = document.createElement('div');
+          // movedKing.innerHTML = `&#${kingCode}`
+          movedKing.innerHTML = kingCode;
   
           let castledRook = document.getElementById('f8')
           castledRook.appendChild(movedRook)
@@ -320,9 +331,15 @@ class BestMoves {
                 endingPosElement.style.backgroundColor = null;
                 
                 let piece = startingPosElement.childNodes[0]
-                let code = piece.innerHTML.charCodeAt(0);
-                let movedPiece = document.createElement('div')
-                movedPiece.innerHTML = `&#${code}`
+                // console.log(piece)
+                // let image = piece.innerHTML
+                // console.log(image)
+                // let code = piece.innerHTML.charCodeAt(0);
+                // let movedPiece = document.createElement('div')
+                // let image = document.getElementById(firstPosID)
+                // movedPiece.appendChild(piece)
+                // let movedPiece = new Image
+                // movedPiece.innerHTML = `&#${code}`
 
                 // moving the piece
 
@@ -333,12 +350,15 @@ class BestMoves {
                   }
                 } else if (endingPosElement.hasChildNodes()) { 
                     endingPosElement.removeChild(endingPosElement.childNodes[0])
-                    startingPosElement.removeChild(startingPosElement.childNodes[0])
-                    endingPosElement.appendChild(movedPiece)
+                    // startingPosElement.removeChild(startingPosElement.childNodes[0])
+                    startingPosElement.removeChild(piece)
+                    endingPosElement.appendChild(piece)
                     this.movesWithoutCapture = 0
                 } else {
-                  endingPosElement.appendChild(movedPiece)
-                  startingPosElement.removeChild(startingPosElement.childNodes[0])
+                  startingPosElement.removeChild(piece)
+                  endingPosElement.appendChild(piece)
+                  // startingPosElement.removeChild(startingPosElement.childNodes[0])
+                  // startingPosElement.removeChild(piece)
                 }
 
                 //meters

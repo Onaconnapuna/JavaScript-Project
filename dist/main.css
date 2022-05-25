@@ -63,9 +63,10 @@
     background-color:rgb(247, 238, 215) ;
     /* z-index: 10; */
     position: relative;
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
   }
+
   .MovesReference li :hover {
     cursor: pointer;
     background-color: rgb(201, 194, 177);
@@ -95,15 +96,18 @@
   } 
   li div {
     /* position: relative; */
+    height: 100%;
     vertical-align: center;
     top: 5px;
   }
   li p {
     position: absolute;
+    bottom: 55px;
     z-index: 10;
     font-size: 16px;
     font-weight: 600;
-    bottom: 1;
+    /* overflow: hidden; */
+    /* bottom: 1; */
 
   }
   #meter-container {
@@ -165,11 +169,9 @@
   /* #black-percentage:hover {
     display: block;
   }
-
   #draw-percentage:hover {
     display: block;
   }
-
   #white-percentage:hover {
     display: block;
   } */
@@ -231,14 +233,15 @@
     margin-top: 30px;
   }
 
-  #links a {
-    /* margin-right: 100px; */
-  }
-
   a img {
     height: 80px;
     width: 80px;
     object-fit: cover;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
   }
 
   /* #Instructions {
@@ -251,7 +254,6 @@
     border: 2px solid rgb(224, 216, 194);
     background-color:rgb(247, 238, 215)
   }
-
   #Instructions p {
     font-family: sans-serif;
     justify-content: center;

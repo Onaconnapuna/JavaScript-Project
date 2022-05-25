@@ -2,8 +2,8 @@ import View from "./scripts/view"
 window.view = View;
 import BestMoves from './scripts/best_moves'
 window.bestMoves = BestMoves;
-import Meter from './scripts/win_meter'
-window.meter = Meter;
+// import Meter from './scripts/win_meter'
+// window.meter = Meter;
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -14,5 +14,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const movesTable = document.getElementById("moves");
   let moves = new BestMoves(movesTable, view, currentFen);
   moves.navButtons();
-  let meter = new Meter();
+  // let meter = new Meter();
 })

@@ -68,18 +68,18 @@ class BestMoves {
         let squares = board.childNodes;
     
         let pieces = {
-            '<img src="../../pieces/rook_w.png">': 'R',
-            '<img src="../../pieces/knight_w.png">': 'N',
-            '<img src="../../pieces/bishop_w.png">': 'B',
-            '<img src="../../pieces/queen_w.png">': 'Q',
-            '<img src="../../pieces/king_w.png">': 'K',  
-            '<img src="../../pieces/pawn_w.png">': 'P',
-            '<img src="../../pieces/rook_b.png">': 'r',
-            '<img src="../../pieces/knight_b.png">': 'n',
-            '<img src="../../pieces/bishop_b.png">': 'b',
-            '<img src="../../pieces/queen_b.png">': 'q',
-            '<img src="../../pieces/king_b.png">': 'k',
-            '<img src="../../pieces/pawn_b.png">': 'p'
+            '<img src="pieces/rook_w.png">': 'R',
+            '<img src="pieces/knight_w.png">': 'N',
+            '<img src="pieces/bishop_w.png">': 'B',
+            '<img src="pieces/queen_w.png">': 'Q',
+            '<img src="pieces/king_w.png">': 'K',  
+            '<img src="pieces/pawn_w.png">': 'P',
+            '<img src="pieces/rook_b.png">': 'r',
+            '<img src="pieces/knight_b.png">': 'n',
+            '<img src="pieces/bishop_b.png">': 'b',
+            '<img src="pieces/queen_b.png">': 'q',
+            '<img src="pieces/king_b.png">': 'k',
+            '<img src="pieces/pawn_b.png">': 'p'
         }
     
         let fenString = "fen="

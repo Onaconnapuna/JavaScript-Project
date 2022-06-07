@@ -55,28 +55,28 @@ class View {
         const whitePieces = [];
 
         whitePieces[0] = new Image;
-        whitePieces[0].src = '../../pieces/rook_w.png'
+        whitePieces[0].src = 'pieces/rook_w.png'
 
         whitePieces[1] = new Image;
-        whitePieces[1].src = '../../pieces/knight_w.png'
+        whitePieces[1].src = 'pieces/knight_w.png'
 
         whitePieces[2] = new Image;
-        whitePieces[2].src = '../../pieces/bishop_w.png'
+        whitePieces[2].src = 'pieces/bishop_w.png'
 
         whitePieces[3] = new Image;
-        whitePieces[3].src = '../../pieces/queen_w.png'
+        whitePieces[3].src = 'pieces/queen_w.png'
 
         whitePieces[4] = new Image;
-        whitePieces[4].src = '../../pieces/king_w.png'
+        whitePieces[4].src = 'pieces/king_w.png'
 
         whitePieces[5] = new Image;
-        whitePieces[5].src = '../../pieces/bishop_w.png'
+        whitePieces[5].src = 'pieces/bishop_w.png'
 
         whitePieces[6] = new Image;
-        whitePieces[6].src = '../../pieces/knight_w.png'
+        whitePieces[6].src = 'pieces/knight_w.png'
 
         whitePieces[7] = new Image;
-        whitePieces[7].src = '../../pieces/rook_w.png'
+        whitePieces[7].src = 'pieces/rook_w.png'
 
         // const whitePawn = new Image
         // whitePawn.src = '../../pieces/pawn_w.png'
@@ -86,28 +86,28 @@ class View {
         const blackPieces = [];
 
         blackPieces[0] = new Image;
-        blackPieces[0].src = '../../pieces/rook_b.png'
+        blackPieces[0].src = 'pieces/rook_b.png'
 
         blackPieces[1] = new Image;
-        blackPieces[1].src = '../../pieces/knight_b.png'
+        blackPieces[1].src = 'pieces/knight_b.png'
 
         blackPieces[2] = new Image;
-        blackPieces[2].src = '../../pieces/bishop_b.png'
+        blackPieces[2].src = 'pieces/bishop_b.png'
 
         blackPieces[3] = new Image;
-        blackPieces[3].src = '../../pieces/queen_b.png'
+        blackPieces[3].src = 'pieces/queen_b.png'
 
         blackPieces[4] = new Image;
-        blackPieces[4].src = '../../pieces/king_b.png'
+        blackPieces[4].src = 'pieces/king_b.png'
 
         blackPieces[5] = new Image;
-        blackPieces[5].src = '../../pieces/bishop_b.png'
+        blackPieces[5].src = 'pieces/bishop_b.png'
 
         blackPieces[6] = new Image;
-        blackPieces[6].src = '../../pieces/knight_b.png'
+        blackPieces[6].src = 'pieces/knight_b.png'
 
         blackPieces[7] = new Image;
-        blackPieces[7].src = '../../pieces/rook_b.png'
+        blackPieces[7].src = 'pieces/rook_b.png'
 
         // const blackPawn = '&#9823'
 
@@ -130,7 +130,8 @@ class View {
                 squares[i].appendChild(piece)
             } else if (i > 7 && i < 16) {
                 const blackPawn = new Image
-                blackPawn.src = '../../pieces/pawn_b.png'
+                blackPawn.src = 'pieces/pawn_b.png'
+                // blackPawn.src = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Chess_pdt60.png'
                 let piece = document.createElement('div');
                 // piece.innerHTML = blackPawn
                 piece.appendChild(blackPawn)
@@ -139,7 +140,7 @@ class View {
                 let piece = document.createElement('div');
                 // piece.innerHTML = whitePawn
                 const whitePawn = new Image
-                whitePawn.src = '../../pieces/pawn_w.png'
+                whitePawn.src = 'pieces/pawn_w.png'
                 piece.appendChild(whitePawn)
                 squares[i].appendChild(piece)
             } else if (i > 55) {
@@ -157,67 +158,67 @@ class View {
         const whitePieces = [];
 
         whitePieces[0] = new Image;
-        whitePieces[0].src = '../../pieces/rook_w.png'
+        whitePieces[0].src = 'pieces/rook_w.png'
 
         whitePieces[1] = new Image;
-        whitePieces[1].src = '../../pieces/knight_w.png'
+        whitePieces[1].src = 'pieces/knight_w.png'
 
         whitePieces[2] = new Image;
-        whitePieces[2].src = '../../pieces/bishop_w.png'
+        whitePieces[2].src = 'pieces/bishop_w.png'
 
         whitePieces[3] = new Image;
-        whitePieces[3].src = '../../pieces/queen_w.png'
+        whitePieces[3].src = 'pieces/queen_w.png'
 
         whitePieces[4] = new Image;
-        whitePieces[4].src = '../../pieces/king_w.png'
+        whitePieces[4].src = 'pieces/king_w.png'
 
         whitePieces[5] = new Image;
-        whitePieces[5].src = '../../pieces/bishop_w.png'
+        whitePieces[5].src = 'pieces/bishop_w.png'
 
         whitePieces[6] = new Image;
-        whitePieces[6].src = '../../pieces/knight_w.png'
+        whitePieces[6].src = 'pieces/knight_w.png'
 
         whitePieces[7] = new Image;
-        whitePieces[7].src = '../../pieces/rook_w.png'
+        whitePieces[7].src = 'pieces/rook_w.png'
 
 
         // const whitePawn = '&#9817'
 
         const whitePawn = new Image 
-        whitePawn.src = '../../pieces/pawn_w.png'
+        whitePawn.src = 'pieces/pawn_w.png'
 
         // const blackPieces = ['&#9820', '&#9822', '&#9821', '&#9819', '&#9818', '&#9821', '&#9822', '&#9820']
 
         const blackPieces = [];
 
         blackPieces[0] = new Image;
-        blackPieces[0].src = '../../pieces/rook_b.png'
+        blackPieces[0].src = 'pieces/rook_b.png'
 
         blackPieces[1] = new Image;
-        blackPieces[1].src = '../../pieces/knight_b.png'
+        blackPieces[1].src = 'pieces/knight_b.png'
 
         blackPieces[2] = new Image;
-        blackPieces[2].src = '../../pieces/bishop_b.png'
+        blackPieces[2].src = 'pieces/bishop_b.png'
 
         blackPieces[3] = new Image;
-        blackPieces[3].src = '../../pieces/queen_b.png'
+        blackPieces[3].src = 'pieces/queen_b.png'
 
         blackPieces[4] = new Image;
-        blackPieces[4].src = '../../pieces/king_b.png'
+        blackPieces[4].src = 'pieces/king_b.png'
 
         blackPieces[5] = new Image;
-        blackPieces[5].src = '../../pieces/bishop_b.png'
+        blackPieces[5].src = 'pieces/bishop_b.png'
 
         blackPieces[6] = new Image;
-        blackPieces[6].src = '../../pieces/knight_b.png'
+        blackPieces[6].src = 'pieces/knight_b.png'
 
         blackPieces[7] = new Image;
-        blackPieces[7].src = '../../pieces/rook_b.png'
+        blackPieces[7].src = 'pieces/rook_b.png'
 
         // const blackPawn = '&#9823'
 
         const blackPawn =  new Image 
-        blackPawn.src = '../../pieces/pawn_b.png'
+        blackPawn.src = 'pieces/pawn_b.png'
 
         let squaresUl = document.getElementsByClassName('BoardPositions')[0];
         let squares = squaresUl.childNodes
